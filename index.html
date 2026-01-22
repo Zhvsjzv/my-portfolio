@@ -1699,7 +1699,7 @@
                 localStorage.setItem('theme', 'dark');
             }
         });
-5 6576237
+
         // Load saved theme
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme === 'light') {
@@ -1940,48 +1940,7 @@
             }
         }
 
-        // Fun Feature 3: Konami code easter egg
-        let konamiCode = [];
-        const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
-        
-        document.addEventListener('keydown', (e) => {
-            konamiCode.push(e.key);
-            konamiCode = konamiCode.slice(-10);
-            
-            if (konamiCode.join('') === konamiSequence.join('')) {
-                activateMatrixMode();
-            }
-        });
-
-        function activateMatrixMode() {
-            document.body.style.background = 'linear-gradient(to bottom, #000000, #001a00)';
-            createEmojiRain();
-            
-            // Show secret message
-            const message = document.createElement('div');
-            message.style.cssText = `
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                background: rgba(0, 217, 255, 0.9);
-                color: #000;
-                padding: 2rem 3rem;
-                border-radius: 20px;
-                font-size: 1.5rem;
-                font-weight: bold;
-                z-index: 10000;
-                box-shadow: 0 0 50px rgba(0, 217, 255, 1);
-                animation: pulse 1s infinite;
-            `;
-            message.textContent = '🎉 You found the secret! 🎉';
-            document.body.appendChild(message);
-            
-            setTimeout(() => {
-                message.remove();
-                document.body.style.background = '';
-            }, 3000);
-        }
+        // Old Konami code removed - using new implementation below
 
         // Fun Feature 4: Shake on pressing 'S'
         document.addEventListener('keydown', (e) => {
