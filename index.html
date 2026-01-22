@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Muhammad Zargham Abbas - Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -400,10 +400,15 @@
             background: var(--bg-color);
             color: var(--text-color);
             line-height: 1.6;
-            transition: all 0.3s ease;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             overflow-x: hidden;
             cursor: default;
             perspective: 1000px;
+            scroll-behavior: smooth;
+        }
+
+        * {
+            transition: color 0.3s ease, background-color 0.3s ease;
         }
 
         /* Cursor trail effect */
@@ -839,60 +844,141 @@
             animation: fadeInUp 1s ease 0.6s backwards;
         }
 
+        .cta-buttons .btn:nth-child(1) {
+            animation: bounceIn 1s ease 0.8s backwards;
+        }
+
+        .cta-buttons .btn:nth-child(2) {
+            animation: bounceIn 1s ease 1s backwards;
+        }
+
+        .cta-buttons .btn:nth-child(3) {
+            animation: bounceIn 1s ease 1.2s backwards;
+        }
+
+        .cta-buttons .btn:nth-child(4) {
+            animation: bounceIn 1s ease 1.4s backwards;
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3) translateY(50px);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+            70% {
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
         .btn {
             padding: 1rem 2rem;
             border: none;
             border-radius: 50px;
             font-size: 1rem;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             text-decoration: none;
             display: inline-block;
             font-weight: 600;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
         }
 
         .btn-primary {
-            background: var(--primary-color);
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
             color: #000000;
             font-family: 'Courier New', monospace;
             font-weight: bold;
+            box-shadow: 0 5px 25px rgba(0, 217, 255, 0.4);
+            animation: buttonFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes buttonFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
         }
 
         .btn-primary:hover {
-            transform: translateY(-5px) translateZ(20px);
+            transform: translateY(-10px) translateZ(20px) scale(1.05);
             box-shadow: 
-                0 15px 40px rgba(0, 217, 255, 0.7), 
-                0 0 30px rgba(0, 217, 255, 0.5),
-                inset 0 0 20px rgba(255, 255, 255, 0.2);
+                0 20px 50px rgba(0, 217, 255, 0.8), 
+                0 0 40px rgba(0, 217, 255, 0.6),
+                inset 0 0 30px rgba(255, 255, 255, 0.3);
+            animation: none;
         }
 
         .btn-primary:active {
-            transform: translateY(-2px) translateZ(10px) scale(0.96);
+            transform: translateY(-2px) translateZ(10px) scale(0.98);
             box-shadow: 0 5px 15px rgba(0, 217, 255, 0.5);
         }
 
         .btn-secondary {
             background: transparent;
             color: var(--primary-color);
-            border: 2px solid var(--primary-color);
+            border: 3px solid var(--primary-color);
             font-family: 'Courier New', monospace;
             font-weight: bold;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.3), inset 0 0 20px rgba(0, 217, 255, 0.1);
+        }
+
+        .btn-secondary::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(0, 217, 255, 0.3), transparent);
+            transform: rotate(45deg);
+            animation: buttonShine 3s infinite;
+        }
+
+        @keyframes buttonShine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
         }
 
         .btn-secondary:hover {
-            background: var(--primary-color);
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
             color: #000000;
-            transform: translateY(-5px) translateZ(20px);
+            transform: translateY(-10px) translateZ(20px) scale(1.05);
             box-shadow: 
-                0 0 30px rgba(0, 217, 255, 0.8),
-                0 15px 40px rgba(0, 217, 255, 0.4),
-                inset 0 0 20px rgba(0, 0, 0, 0.2);
+                0 0 40px rgba(0, 217, 255, 1),
+                0 20px 50px rgba(0, 217, 255, 0.6),
+                inset 0 0 30px rgba(255, 255, 255, 0.2);
+            border-color: var(--accent-color);
         }
 
         .btn-secondary:active {
-            transform: translateY(-2px) translateZ(10px) scale(0.96);
+            transform: translateY(-2px) translateZ(10px) scale(0.98);
             box-shadow: 0 5px 15px rgba(0, 217, 255, 0.4);
         }
 
@@ -1468,23 +1554,30 @@
             }
 
             body {
-                font-size: 16px;
+                font-size: 14px;
+            }
+
+            .hero {
+                padding: 1rem;
+                min-height: 90vh;
             }
 
             .hero-content h1 {
-                font-size: 2rem;
+                font-size: 1.6rem;
+                margin-bottom: 0.8rem;
             }
 
             .hero-content .subtitle {
-                font-size: 1.1rem;
-            }
-
-            .hero-content p {
                 font-size: 0.95rem;
             }
 
+            .hero-content p {
+                font-size: 0.85rem;
+                margin-bottom: 1.5rem;
+            }
+
             .section-title {
-                font-size: 1.8rem;
+                font-size: 1.5rem;
             }
 
             .about-content,
@@ -1498,26 +1591,51 @@
 
             .profile-container {
                 flex-direction: column;
-                gap: 1.5rem;
+                gap: 1rem;
             }
 
             .profile-image {
-                width: 200px;
-                height: 200px;
+                width: 150px;
+                height: 150px;
             }
 
             .cta-buttons {
                 flex-direction: column;
+                gap: 0.8rem;
+                width: 100%;
             }
 
             .btn {
-                padding: 0.8rem 1.5rem;
-                font-size: 0.9rem;
+                padding: 0.9rem 1.8rem;
+                font-size: 0.85rem;
+                width: 100%;
+            }
+
+            .social-links {
+                gap: 1rem;
             }
 
             .social-links a {
-                width: 45px;
-                height: 45px;
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            .visitor-badge {
+                bottom: 10px;
+                right: 10px;
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+            }
+
+            .fab-menu {
+                bottom: 60px;
+                right: 10px;
+            }
+
+            .fab-main {
+                width: 50px;
+                height: 50px;
                 font-size: 1.2rem;
             }
         }
