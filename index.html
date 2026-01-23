@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Muhammad Zargham Abbas - Portfolio</title>
+    <title>Muhammad Zargham Abbas - Ethical Hacking Services</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Optimized - Removed loading screen for better performance */
@@ -1019,6 +1019,103 @@
             gap: 3rem;
         }
 
+        /* Services Section */
+        .services-container {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .services-notice {
+            background: var(--card-bg);
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(0, 217, 255, 0.2);
+            border: 2px solid rgba(0, 217, 255, 0.3);
+        }
+
+        .notice-icon {
+            font-size: 4rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.8;
+                transform: scale(1.05);
+            }
+        }
+
+        .services-notice h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .notice-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            color: var(--text-secondary);
+        }
+
+        .services-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .service-item {
+            background: rgba(0, 217, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 217, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .service-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 217, 255, 0.3);
+            border-color: var(--primary-color);
+        }
+
+        .service-item i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .service-item h4 {
+            font-size: 1.1rem;
+            color: var(--text-color);
+        }
+
+        .coming-soon-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent-color);
+            margin: 2rem 0;
+            padding: 1rem;
+            background: rgba(0, 217, 255, 0.1);
+            border-radius: 10px;
+            border: 1px solid rgba(0, 217, 255, 0.3);
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
         .contact-info {
             display: flex;
             flex-direction: column;
@@ -1172,6 +1269,26 @@
                 grid-template-columns: 1fr;
             }
 
+            .services-preview {
+                grid-template-columns: 1fr;
+            }
+
+            .service-item {
+                padding: 1rem;
+            }
+
+            .notice-icon {
+                font-size: 3rem;
+            }
+
+            .services-notice h3 {
+                font-size: 1.5rem;
+            }
+
+            .coming-soon-text {
+                font-size: 1rem;
+            }
+
             .about-stats {
                 grid-template-columns: 1fr;
             }
@@ -1244,8 +1361,7 @@
             <ul class="nav-links" id="navLinks">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
-                <li><a href="skills.html">Skills</a></li>
-                <li><a href="education.html">Education</a></li>
+                <li><a href="#services">Services</a></li>
                 <li><a href="#contact">Contact</a></li>
                 <li><button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button></li>
             </ul>
@@ -1264,14 +1380,14 @@
                 </div>
                 <div class="profile-text">
                     <h1 class="typing-animation glitch">Muhammad Zargham Abbas</h1>
-                    <p class="subtitle">Data Science Student | Aspiring Cybersecurity Expert</p>
+                    <p class="subtitle">Ethical Hacking Services | Cybersecurity Expert</p>
                 </div>
             </div>
             <div class="cta-buttons">
                 <a href="#home" class="btn btn-primary">> Home_</a>
                 <a href="about.html" class="btn btn-secondary">> About Me_</a>
-                <a href="skills.html" class="btn btn-secondary">> View Skills_</a>
-                <a href="education.html" class="btn btn-secondary">> Education_</a>
+                <a href="#services" class="btn btn-secondary">> Our Services_</a>
+                <a href="#contact" class="btn btn-secondary">> Contact Us_</a>
                 <a href="https://wa.me/923056576237" target="_blank" class="btn btn-primary">> WhatsApp_</a>
             </div>
             <div class="social-links">
@@ -1282,6 +1398,40 @@
                 <a href="https://www.facebook.com/profile.php?id=61554862019663" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
                 <a href="https://github.com" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
                 <a href="https://linkedin.com" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="reveal">
+        <h2 class="section-title">Our Services</h2>
+        <div class="services-container">
+            <div class="services-notice">
+                <div class="notice-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Ethical Hacking Services Coming Soon</h3>
+                <p class="notice-text">We are currently preparing our comprehensive ethical hacking and cybersecurity services. Our team is working hard to bring you professional security solutions.</p>
+                <div class="services-preview">
+                    <div class="service-item">
+                        <i class="fas fa-lock"></i>
+                        <h4>Penetration Testing</h4>
+                    </div>
+                    <div class="service-item">
+                        <i class="fas fa-bug"></i>
+                        <h4>Vulnerability Assessment</h4>
+                    </div>
+                    <div class="service-item">
+                        <i class="fas fa-network-wired"></i>
+                        <h4>Network Security</h4>
+                    </div>
+                    <div class="service-item">
+                        <i class="fas fa-user-shield"></i>
+                        <h4>Security Consulting</h4>
+                    </div>
+                </div>
+                <p class="coming-soon-text">Services will be available soon. The owner is currently not ready to provide services. Stay tuned!</p>
+                <a href="#contact" class="btn btn-primary">Contact for Updates</a>
             </div>
         </div>
     </section>
