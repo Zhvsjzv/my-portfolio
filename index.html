@@ -6,363 +6,27 @@
     <title>Muhammad Zargham Abbas - Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Loading Screen - Cool entrance */
-        .loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #000;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 99999;
-            transition: opacity 0.5s ease;
-        }
+        /* Optimized - Removed loading screen for better performance */
 
-        .loading-screen.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
+        /* Optimized - Removed scroll progress bar */
 
-        .loader {
-            width: 100px;
-            height: 100px;
-            border: 5px solid rgba(0, 217, 255, 0.1);
-            border-top: 5px solid var(--primary-color);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
+        /* Optimized - Removed custom cursor */
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+        /* Optimized - Removed matrix rain effect */
 
-        .loading-text {
-            margin-top: 2rem;
-            font-size: 1.5rem;
-            color: var(--primary-color);
-            font-family: 'Courier New', monospace;
-            animation: pulse 1.5s ease-in-out infinite;
-        }
+        /* Optimized - Removed visitor badge */
 
-        /* Scroll Progress Bar - Cool feature */
-        .scroll-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 0%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
-            z-index: 99999;
-            box-shadow: 0 0 10px var(--primary-color);
-            transition: width 0.1s ease;
-        }
+        /* Optimized - Removed typing animation */
 
-        /* Cool Custom Cursor */
-        .custom-cursor {
-            position: fixed;
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--primary-color);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            transition: all 0.15s ease;
-            transform: translate(-50%, -50%);
-            box-shadow: 0 0 20px var(--primary-color);
-        }
+        /* Optimized - Removed glitch effect */
 
-        .custom-cursor.hover {
-            width: 40px;
-            height: 40px;
-            background: rgba(0, 217, 255, 0.2);
-        }
+        /* Optimized - Removed achievement badges */
 
-        /* Matrix Rain Effect */
-        .matrix-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            opacity: 0.15;
-            pointer-events: none;
-        }
+        /* Optimized - Removed floating action button */
 
-        /* Visitor Counter Badge - Cool */
-        .visitor-badge {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--card-bg);
-            padding: 0.8rem 1.5rem;
-            border-radius: 30px;
-            border: 2px solid var(--primary-color);
-            box-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            animation: slideInRight 1s ease;
-        }
+        /* Optimized - Removed sound wave animation */
 
-        @keyframes slideInRight {
-            from {
-                transform: translateX(200px);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        .visitor-badge i {
-            color: var(--primary-color);
-            font-size: 1.2rem;
-        }
-
-        .visitor-count {
-            font-family: 'Courier New', monospace;
-            color: var(--primary-color);
-            font-weight: bold;
-            font-size: 1.1rem;
-        }
-
-        /* Typing Animation for Name */
-        .typing-animation::after {
-            content: '|';
-            animation: blink 0.7s infinite;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-
-        /* Glitch Effect on Hover */
-        .glitch {
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .glitch:hover {
-            animation: glitch-animation 0.3s infinite;
-        }
-
-        @keyframes glitch-animation {
-            0% {
-                transform: translate(0);
-            }
-            20% {
-                transform: translate(-2px, 2px);
-            }
-            40% {
-                transform: translate(-2px, -2px);
-            }
-            60% {
-                transform: translate(2px, 2px);
-            }
-            80% {
-                transform: translate(2px, -2px);
-            }
-            100% {
-                transform: translate(0);
-            }
-        }
-
-        /* Achievement Badges */
-        .achievements {
-            position: fixed;
-            top: 100px;
-            right: 20px;
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .achievement-badge {
-            background: var(--card-bg);
-            padding: 0.8rem;
-            border-radius: 15px;
-            border: 2px solid var(--primary-color);
-            box-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            animation: bounceIn 0.6s ease;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .achievement-badge:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 30px rgba(0, 217, 255, 0.8);
-        }
-
-        @keyframes bounceIn {
-            0% {
-                transform: scale(0) rotate(180deg);
-                opacity: 0;
-            }
-            60% {
-                transform: scale(1.2) rotate(-10deg);
-                opacity: 1;
-            }
-            100% {
-                transform: scale(1) rotate(0);
-            }
-        }
-
-        .achievement-icon {
-            font-size: 1.5rem;
-        }
-
-        .achievement-text {
-            font-size: 0.8rem;
-            color: var(--text-color);
-        }
-
-        /* Floating Action Button */
-        .fab-menu {
-            position: fixed;
-            bottom: 80px;
-            right: 20px;
-            z-index: 1000;
-        }
-
-        .fab-main {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-            border: none;
-            color: #000;
-            font-size: 1.5rem;
-            cursor: pointer;
-            box-shadow: 0 5px 25px rgba(0, 217, 255, 0.5);
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .fab-main:hover {
-            transform: rotate(90deg) scale(1.1);
-            box-shadow: 0 8px 35px rgba(0, 217, 255, 0.8);
-        }
-
-        .fab-options {
-            position: absolute;
-            bottom: 70px;
-            right: 0;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            opacity: 0;
-            pointer-events: none;
-            transition: all 0.3s ease;
-        }
-
-        .fab-options.active {
-            opacity: 1;
-            pointer-events: all;
-        }
-
-        .fab-option {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--card-bg);
-            border: 2px solid var(--primary-color);
-            color: var(--primary-color);
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            animation: slideUp 0.3s ease;
-        }
-
-        @keyframes slideUp {
-            from {
-                transform: translateY(20px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .fab-option:hover {
-            transform: scale(1.2);
-            background: var(--primary-color);
-            color: #000;
-        }
-
-        /* Sound Wave Animation */
-        .sound-wave {
-            display: flex;
-            gap: 3px;
-            align-items: center;
-        }
-
-        .sound-bar {
-            width: 4px;
-            height: 20px;
-            background: var(--primary-color);
-            border-radius: 2px;
-            animation: soundWave 0.8s ease-in-out infinite;
-        }
-
-        .sound-bar:nth-child(2) { animation-delay: 0.2s; }
-        .sound-bar:nth-child(3) { animation-delay: 0.4s; }
-        .sound-bar:nth-child(4) { animation-delay: 0.6s; }
-
-        @keyframes soundWave {
-            0%, 100% { height: 10px; }
-            50% { height: 30px; }
-        }
-
-        /* Code Rain Background */
-        .code-rain {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 0;
-            opacity: 0.1;
-            pointer-events: none;
-        }
-
-        .code-symbol {
-            position: absolute;
-            color: var(--primary-color);
-            font-family: 'Courier New', monospace;
-            font-size: 1.2rem;
-            animation: fall 10s linear infinite;
-        }
-
-        @keyframes fall {
-            0% {
-                top: -50px;
-                opacity: 1;
-            }
-            100% {
-                top: 100%;
-                opacity: 0;
-            }
-        }
+        /* Optimized - Removed code rain background */
 
     </style>
     <style>
@@ -400,103 +64,21 @@
             background: var(--bg-color);
             color: var(--text-color);
             line-height: 1.6;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            /* Optimized: Faster transition for better performance */
+            transition: all 0.2s ease;
             overflow-x: hidden;
             cursor: default;
-            perspective: 1000px;
-            scroll-behavior: smooth;
         }
 
-        * {
-            transition: color 0.3s ease, background-color 0.3s ease;
-        }
+        /* Optimized: Removed global transition for better performance */
 
-        /* Cursor trail effect */
-        .cursor-trail {
-            position: fixed;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(0, 217, 255, 0.8), rgba(0, 255, 255, 0.4), transparent);
-            pointer-events: none;
-            opacity: 0.8;
-            animation: fadeOut 1.5s ease-out forwards;
-            z-index: 9999;
-            box-shadow: 0 0 20px rgba(0, 217, 255, 0.6);
-        }
+        /* Optimized - Removed cursor trail effect */
 
-        @keyframes fadeOut {
-            0% {
-                opacity: 0.8;
-                transform: scale(0.5) rotate(0deg);
-            }
-            100% {
-                opacity: 0;
-                transform: scale(3) rotate(180deg);
-            }
-        }
+        /* Optimized - Removed ripple effect */
 
-        /* Ripple effect */
-        .ripple {
-            position: absolute;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(0, 217, 255, 0.6), rgba(0, 255, 255, 0.3));
-            animation: ripple 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            pointer-events: none;
-            box-shadow: 0 0 30px rgba(0, 217, 255, 0.8), inset 0 0 20px rgba(0, 255, 255, 0.6);
-        }
+        /* Optimized - Removed floating particles */
 
-        @keyframes ripple {
-            0% {
-                transform: scale(0) translateZ(0);
-                opacity: 1;
-            }
-            100% {
-                transform: scale(5) translateZ(50px);
-                opacity: 0;
-            }
-        }
-
-        /* Fun floating particles */
-        .particle {
-            position: fixed;
-            width: 10px;
-            height: 10px;
-            background: var(--primary-color);
-            border-radius: 50%;
-            pointer-events: none;
-            opacity: 0.6;
-            box-shadow: 0 0 20px var(--primary-color);
-            animation: float-particle 4s ease-in-out infinite;
-            z-index: 0;
-        }
-
-        @keyframes float-particle {
-            0%, 100% {
-                transform: translateY(0) translateX(0) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.6;
-            }
-            90% {
-                opacity: 0.6;
-            }
-            100% {
-                transform: translateY(-100vh) translateX(50px) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        /* Fun emoji rain */
-        .emoji-rain {
-            position: fixed;
-            font-size: 2rem;
-            pointer-events: none;
-            opacity: 0.8;
-            animation: fall 3s linear forwards;
-            z-index: 9998;
-        }
+        /* Optimized - Removed emoji rain */
 
         @keyframes fall {
             to {
@@ -1626,17 +1208,9 @@
                 font-size: 1rem;
             }
 
-            .visitor-badge {
-                bottom: 10px;
-                right: 10px;
-                padding: 0.5rem 1rem;
-                font-size: 0.8rem;
-            }
+            /* Optimized: Removed visitor badge responsive styles */
 
-            .fab-menu {
-                bottom: 60px;
-                right: 10px;
-            }
+            /* Optimized: Removed FAB menu responsive styles */
 
             .fab-main {
                 width: 50px;
@@ -1659,48 +1233,7 @@
     </style>
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div class="loading-screen" id="loadingScreen">
-        <div class="loader"></div>
-        <div class="loading-text">Loading Portfolio...</div>
-    </div>
-
-    <!-- Scroll Progress Bar -->
-    <div class="scroll-progress" id="scrollProgress"></div>
-
-    <!-- Custom Cursor -->
-    <div class="custom-cursor" id="customCursor"></div>
-
-    <!-- Matrix Rain Canvas -->
-    <canvas class="matrix-canvas" id="matrixCanvas"></canvas>
-
-    <!-- Visitor Counter Badge -->
-    <div class="visitor-badge">
-        <i class="fas fa-eye"></i>
-        <span class="visitor-count" id="visitorCount">1337</span>
-        <span style="color: var(--text-secondary); font-size: 0.9rem;">visitors</span>
-    </div>
-
-    <!-- Achievement Badges -->
-    <div class="achievements" id="achievements"></div>
-
-    <!-- Floating Action Button -->
-    <div class="fab-menu">
-        <div class="fab-options" id="fabOptions">
-            <button class="fab-option" onclick="toggleMatrix()" title="Matrix Mode">
-                <i class="fas fa-code"></i>
-            </button>
-            <button class="fab-option" onclick="downloadResume()" title="Download CV">
-                <i class="fas fa-download"></i>
-            </button>
-            <button class="fab-option" onclick="sharePortfolio()" title="Share">
-                <i class="fas fa-share-alt"></i>
-            </button>
-        </div>
-        <button class="fab-main" id="fabMain">
-            <i class="fas fa-plus"></i>
-        </button>
-    </div>
+    <!-- Optimized: Removed loading screen, custom cursor, matrix effect, visitor badge, achievements, and FAB menu for better performance -->
 
     <!-- Navigation -->
     <nav>
@@ -1913,60 +1446,9 @@
             }
         });
 
-        // Cursor Trail Effect
-        let cursorTrailEnabled = true;
-        let lastTrailTime = 0;
-        document.addEventListener('mousemove', (e) => {
-            const currentTime = Date.now();
-            if (cursorTrailEnabled && currentTime - lastTrailTime > 50) {
-                lastTrailTime = currentTime;
-                const trail = document.createElement('div');
-                trail.className = 'cursor-trail';
-                trail.style.left = e.pageX + 'px';
-                trail.style.top = e.pageY + 'px';
-                document.body.appendChild(trail);
-                
-                setTimeout(() => {
-                    trail.remove();
-                }, 1500);
-            }
-        });
-
-        // Ripple Effect on Click
-        document.addEventListener('click', (e) => {
-            // Create multiple ripples for more effect
-            for (let i = 0; i < 3; i++) {
-                setTimeout(() => {
-                    const ripple = document.createElement('div');
-                    ripple.className = 'ripple';
-                    ripple.style.left = e.pageX - 15 + 'px';
-                    ripple.style.top = e.pageY - 15 + 'px';
-                    ripple.style.width = '30px';
-                    ripple.style.height = '30px';
-                    document.body.appendChild(ripple);
-                    
-                    setTimeout(() => {
-                        ripple.remove();
-                    }, 800);
-                }, i * 100);
-            }
-        });
-
-        // Add ripple effect to buttons
-        document.querySelectorAll('.btn, .btn-primary, .btn-secondary').forEach(button => {
-            button.addEventListener('click', function(e) {
-                const rect = this.getBoundingClientRect();
-                const ripple = document.createElement('span');
-                ripple.className = 'ripple';
-                ripple.style.left = e.clientX - rect.left + 'px';
-                ripple.style.top = e.clientY - rect.top + 'px';
-                this.appendChild(ripple);
-                
-                setTimeout(() => {
-                    ripple.remove();
-                }, 600);
-            });
-        });
+        // Optimized: Removed cursor trail effect for better performance
+        
+        // Optimized: Removed ripple effect for better performance
 
         // Parallax effect on hero section - Disabled to prevent scroll mixing
         // window.addEventListener('scroll', () => {
@@ -1980,348 +1462,35 @@
         // Add floating animation to cards on hover - removed to prevent conflict with CSS 3D effects
         // The 3D effects are now handled by CSS
 
-        // Add 3D tilt effect to cards based on mouse position
-        document.querySelectorAll('.skill-card, .stat-card, .timeline-item, .contact-item').forEach(card => {
-            card.addEventListener('mousemove', function(e) {
-                const rect = this.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                
-                const rotateX = (y - centerY) / 10;
-                const rotateY = (centerX - x) / 10;
-                
-                this.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(20px) scale(1.02)`;
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0) scale(1)';
-            });
-        });
+        // Optimized: Removed 3D tilt effect for better performance
 
-        // Glowing effect on scroll for section titles
-        const sectionTitles = document.querySelectorAll('.section-title');
-        window.addEventListener('scroll', () => {
-            sectionTitles.forEach(title => {
-                const rect = title.getBoundingClientRect();
-                if (rect.top < window.innerHeight * 0.8) {
-                    title.style.textShadow = '0 0 20px rgba(0, 217, 255, 0.8), 0 0 40px rgba(0, 217, 255, 0.5)';
-                }
-            });
-        });
+        // Optimized: Removed glowing effect for better performance
 
-        // Fun Feature 1: Floating particles
-        function createParticle() {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.animationDelay = Math.random() * 2 + 's';
-            particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
-            document.body.appendChild(particle);
-            
-            setTimeout(() => {
-                particle.remove();
-            }, 6000);
-        }
+        // Optimized: Removed floating particles for better performance
 
-        // Create particles periodically
-        setInterval(createParticle, 800);
+        // Optimized: Removed emoji rain for better performance
 
-        // Fun Feature 2: Emoji rain on double click
-        let clickCount = 0;
-        let clickTimer;
-        document.addEventListener('click', () => {
-            clickCount++;
-            if (clickCount === 1) {
-                clickTimer = setTimeout(() => {
-                    clickCount = 0;
-                }, 300);
-            } else if (clickCount === 2) {
-                clearTimeout(clickTimer);
-                clickCount = 0;
-                createEmojiRain();
-            }
-        });
+        // Optimized: Removed shake animation for better performance
 
-        function createEmojiRain() {
-            const emojis = ['🚀', '💻', '🔐', '⚡', '🎯', '💡', '🌟', '✨'];
-            for (let i = 0; i < 15; i++) {
-                setTimeout(() => {
-                    const emoji = document.createElement('div');
-                    emoji.className = 'emoji-rain';
-                    emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-                    emoji.style.left = Math.random() * 100 + '%';
-                    emoji.style.animationDuration = (Math.random() * 2 + 2) + 's';
-                    document.body.appendChild(emoji);
-                    
-                    setTimeout(() => {
-                        emoji.remove();
-                    }, 3000);
-                }, i * 100);
-            }
-        }
+        // Optimized: Removed logo click counter for better performance
 
-        // Old Konami code removed - using new implementation below
+        // ========== SIMPLIFIED FEATURES ==========
 
-        // Fun Feature 4: Shake on pressing 'S'
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 's' || e.key === 'S') {
-                document.body.style.animation = 'shake 0.5s';
-                setTimeout(() => {
-                    document.body.style.animation = '';
-                }, 500);
-            }
-        });
+        // Optimized: Removed loading screen for better performance
 
-        // Add shake animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes shake {
-                0%, 100% { transform: translateX(0); }
-                25% { transform: translateX(-10px) rotate(-1deg); }
-                75% { transform: translateX(10px) rotate(1deg); }
-            }
-        `;
-        document.head.appendChild(style);
+        // Optimized: Removed scroll progress bar for better performance
 
-        // Fun Feature 5: Click counter on logo
-        let logoClicks = 0;
-        document.querySelector('.logo').addEventListener('click', (e) => {
-            e.preventDefault();
-            logoClicks++;
-            
-            if (logoClicks === 5) {
-                createEmojiRain();
-                logoClicks = 0;
-                
-                // Flash effect
-                document.body.style.transition = 'filter 0.3s';
-                document.body.style.filter = 'brightness(1.5) saturate(1.5)';
-                setTimeout(() => {
-                    document.body.style.filter = '';
-                }, 300);
-            }
-        });
+        // Optimized: Removed custom cursor for better performance
 
-        // ========== COOL FEATURES ==========
+        // Optimized: Removed matrix rain effect for better performance
 
-        // Loading Screen
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.getElementById('loadingScreen').classList.add('hidden');
-                showAchievement('🎉', 'Portfolio Loaded!');
-            }, 1500);
-        });
+        // Optimized: Removed visitor counter for better performance
 
-        // Scroll Progress Bar
-        window.addEventListener('scroll', () => {
-            const scrollProgress = document.getElementById('scrollProgress');
-            const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const scrolled = (window.scrollY / scrollHeight) * 100;
-            scrollProgress.style.width = scrolled + '%';
-        });
+        // Optimized: Removed achievement system for better performance
 
-        // Custom Cursor
-        const cursor = document.getElementById('customCursor');
-        let mouseX = 0, mouseY = 0;
-        let cursorX = 0, cursorY = 0;
+        // Optimized: Removed floating action button for better performance
 
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-        });
-
-        function animateCursor() {
-            cursorX += (mouseX - cursorX) * 0.1;
-            cursorY += (mouseY - cursorY) * 0.1;
-            cursor.style.left = cursorX + 'px';
-            cursor.style.top = cursorY + 'px';
-            requestAnimationFrame(animateCursor);
-        }
-        animateCursor();
-
-        // Cursor hover effect
-        document.querySelectorAll('a, button, .btn').forEach(el => {
-            el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-            el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-        });
-
-        // Matrix Rain Effect
-        const canvas = document.getElementById('matrixCanvas');
-        const ctx = canvas.getContext('2d');
-
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        const matrix = "01ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        const fontSize = 16;
-        const columns = canvas.width / fontSize;
-        const drops = [];
-
-        for (let i = 0; i < columns; i++) {
-            drops[i] = 1;
-        }
-
-        let matrixEnabled = true;
-
-        function drawMatrix() {
-            if (!matrixEnabled) return;
-            
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            ctx.fillStyle = '#00d9ff';
-            ctx.font = fontSize + 'px monospace';
-
-            for (let i = 0; i < drops.length; i++) {
-                const text = matrix[Math.floor(Math.random() * matrix.length)];
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                    drops[i] = 0;
-                }
-                drops[i]++;
-            }
-        }
-
-        setInterval(drawMatrix, 35);
-
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        });
-
-        // Visitor Counter Animation
-        const visitorCount = document.getElementById('visitorCount');
-        let currentCount = 0;
-        const targetCount = Math.floor(Math.random() * 5000) + 1000;
-
-        function animateCounter() {
-            if (currentCount < targetCount) {
-                currentCount += Math.ceil(targetCount / 100);
-                if (currentCount > targetCount) currentCount = targetCount;
-                visitorCount.textContent = currentCount.toLocaleString();
-                requestAnimationFrame(animateCounter);
-            }
-        }
-        setTimeout(animateCounter, 2000);
-
-        // Achievement System
-        let achievementsShown = [];
-
-        function showAchievement(icon, text) {
-            if (achievementsShown.includes(text)) return;
-            achievementsShown.push(text);
-
-            const achievementsContainer = document.getElementById('achievements');
-            const badge = document.createElement('div');
-            badge.className = 'achievement-badge';
-            badge.innerHTML = `
-                <div class="achievement-icon">${icon}</div>
-                <div class="achievement-text">${text}</div>
-            `;
-            achievementsContainer.appendChild(badge);
-
-            setTimeout(() => {
-                badge.style.animation = 'fadeOut 0.5s ease';
-                setTimeout(() => badge.remove(), 500);
-            }, 3000);
-        }
-
-        // Trigger achievements
-        let scrollAchievement = false;
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 500 && !scrollAchievement) {
-                showAchievement('📜', 'Explorer!');
-                scrollAchievement = true;
-            }
-        });
-
-        setTimeout(() => showAchievement('⚡', 'Fast Clicker!'), 5000);
-
-        // Floating Action Button
-        const fabMain = document.getElementById('fabMain');
-        const fabOptions = document.getElementById('fabOptions');
-        let fabOpen = false;
-
-        fabMain.addEventListener('click', () => {
-            fabOpen = !fabOpen;
-            if (fabOpen) {
-                fabOptions.classList.add('active');
-                fabMain.querySelector('i').className = 'fas fa-times';
-            } else {
-                fabOptions.classList.remove('active');
-                fabMain.querySelector('i').className = 'fas fa-plus';
-            }
-        });
-
-        // Toggle Matrix
-        function toggleMatrix() {
-            matrixEnabled = !matrixEnabled;
-            if (!matrixEnabled) {
-                ctx.fillStyle = 'rgba(0, 0, 0, 1)';
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-            }
-            showAchievement('🔮', 'Matrix Mode!');
-        }
-
-        // Download Resume
-        function downloadResume() {
-            showAchievement('📄', 'Coming Soon!');
-            alert('Resume download feature coming soon! 🚀');
-        }
-
-        // Share Portfolio
-        function sharePortfolio() {
-            if (navigator.share) {
-                navigator.share({
-                    title: 'Muhammad Zargham Abbas - Portfolio',
-                    text: 'Check out my awesome portfolio!',
-                    url: window.location.href
-                }).then(() => {
-                    showAchievement('📤', 'Shared!');
-                });
-            } else {
-                navigator.clipboard.writeText(window.location.href);
-                showAchievement('📋', 'Link Copied!');
-            }
-        }
-
-        // Konami Code Super Secret (↑↑↓↓←→←→BA)
-        let konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
-        let konamiIndex = 0;
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === konamiSequence[konamiIndex]) {
-                konamiIndex++;
-                if (konamiIndex === konamiSequence.length) {
-                    activateGodMode();
-                    konamiIndex = 0;
-                }
-            } else {
-                konamiIndex = 0;
-            }
-        });
-
-        function activateGodMode() {
-            showAchievement('👑', 'GOD MODE!');
-            document.body.style.animation = 'rainbow 2s infinite';
-            
-            const rainbowStyle = document.createElement('style');
-            rainbowStyle.textContent = `
-                @keyframes rainbow {
-                    0% { filter: hue-rotate(0deg); }
-                    100% { filter: hue-rotate(360deg); }
-                }
-            `;
-            document.head.appendChild(rainbowStyle);
-
-            setTimeout(() => {
-                document.body.style.animation = '';
-            }, 5000);
-        }
+        // Optimized: Removed Konami code for better performance
     </script>
 </body>
 </html>

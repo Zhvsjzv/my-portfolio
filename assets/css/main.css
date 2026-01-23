@@ -64,7 +64,7 @@
 }
 
 html {
-    scroll-behavior: smooth;
+    /* Optimized: Removed smooth scrolling for better performance */
     font-size: 16px;
 }
 
@@ -73,7 +73,8 @@ body {
     background: var(--bg-color);
     color: var(--text-color);
     line-height: 1.6;
-    transition: background var(--transition-normal), color var(--transition-normal);
+    /* Optimized: Faster transitions for better performance */
+    transition: background 0.2s ease, color 0.2s ease;
     overflow-x: hidden;
 }
 
