@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS Study Resources - Muhammad Zargham Abbas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #00d9ff;
+            --secondary-color: #0066cc;
+            --accent-color: #00ffff;
+            --bg-color: #000000;
+            --bg-secondary: #0f0f0f;
+            --text-color: #ffffff;
+            --text-secondary: #b0b0b0;
+            --card-bg: #1a1a1a;
+            --shadow: 0 20px 50px rgba(0, 217, 255, 0.2);
+        }
+
+        .light-mode {
+            --bg-color: #f5f5f5;
+            --bg-secondary: #ffffff;
+            --text-color: #1a1a1a;
+            --text-secondary: #4a4a4a;
+            --card-bg: #ffffff;
+            --shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+            --primary-color: #0099cc;
+            --accent-color: #0066ff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            perspective: 1000px;
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 10000;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 217, 255, 0.3);
+            border-bottom: 1px solid var(--primary-color);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid var(--primary-color);
+            box-shadow: 0 0 30px rgba(0, 217, 255, 0.6);
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .nav-links a.active {
+            color: var(--primary-color);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: 2px solid var(--primary-color);
+            color: var(--text-color);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .theme-toggle:hover {
+            background: var(--primary-color);
+            color: #000;
+            transform: scale(1.1);
+        }
+
+        .mobile-menu {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            font-family: 'Courier New', monospace;
+            color: var(--primary-color);
+            text-shadow: 0 0 20px rgba(0, 217, 255, 0.8);
+        }
+
+        .section-title::before {
+            content: '> ';
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        .resources-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .resource-category {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 217, 255, 0.2);
+            border: 1px solid rgba(0, 217, 255, 0.3);
+            transition: all 0.4s ease;
+        }
+
+        .resource-category:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 217, 255, 0.4);
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .category-icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+            text-shadow: 0 0 15px rgba(0, 217, 255, 0.8);
+        }
+
+        .category-title {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            font-family: 'Courier New', monospace;
+        }
+
+        .resource-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .resource-item {
+            background: rgba(0, 217, 255, 0.05);
+            padding: 1rem;
+            border-radius: 10px;
+            border-left: 3px solid var(--primary-color);
+            transition: all 0.3s ease;
+        }
+
+        .resource-item:hover {
+            background: rgba(0, 217, 255, 0.1);
+            border-left-width: 5px;
+            padding-left: 1.2rem;
+        }
+
+        .resource-link {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .resource-link:hover {
+            color: var(--primary-color);
+        }
+
+        .resource-link i {
+            color: var(--primary-color);
+        }
+
+        .resource-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        footer {
+            background: var(--bg-secondary);
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 5rem;
+            border-top: 1px solid var(--primary-color);
+        }
+
+        footer p {
+            color: var(--text-secondary);
+        }
+
+        .footer-links {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+            text-shadow: 0 0 10px var(--accent-color);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .resources-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <div class="logo">
+                <img src="images/profile.jpg" alt="MZA">
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="skills.html">Skills</a></li>
+                <li><a href="education.html">Education</a></li>
+                <li><a href="resources.html" class="active">Resources</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button></li>
+            </ul>
+            <button class="mobile-menu" id="mobileMenu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <section id="resources">
+        <h1 class="section-title">CS Study Resources</h1>
+        <p class="section-subtitle">Curated collection of helpful resources for Computer Science students and professionals</p>
+
+        <div class="resources-container">
+            <!-- Programming Fundamentals -->
+            <div class="resource-category">
+                <div class="category-header">
+                    <i class="fas fa-code category-icon"></i>
+                    <h2 class="category-title">Programming Fundamentals</h2>
+                </div>
+                <ul class="resource-list">
+                    <li class="resource-item">
+                        <a href="https://www.codecademy.com/" target="_blank" class="resource-link">
+                            <i class="fas fa-external-link-alt"></i>
+                            Codecademy
+                        </a>
+                        <p class="resource-description">Interactive programming lessons for beginners</p>
+                    </li>
+                    <li class="resource-item">
+                        <a href="https://www.freecodecamp.org/" target="_blank" class="resource-link">
+                            <i class="fas fa-external-link-alt"></i>
+                            freeCodeCamp
+                        </a>
+                        <p class="resource-description">Free coding bootcamp with certifications</p>
+                    </li>
+                    <li class="resource-item">
+                        <a href="https://www.w3schools.com/" target="_blank" class="resource-link">
+                            <i class="fas fa-external-link-alt"></i>
+                            W3Schools
+                        </a>
+                        <p class="resource-description">Comprehensive web development tutorials</p>
+                    </li>
+                    <li class="resource-item">
+                        <a href="https://www.programiz.com/" target="_blank" class="resource-link">
+                            <i class="fas fa-external-link-alt"></i>
+                            Programiz
+                        </a>
+                        <p class="resource-description">Easy to understand programming tutorials</p>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Data Structures & Algorithms -->
+            <div class="resource-category">
+                <div class="category-header">
+                    <i class="fas fa-project-diagram category-icon"></i>
+                    <h2 class="category-title">Data Structures & Algorithms</h2>
+                </div>
+                <ul class="resource-list">
+                    <li class="resource-item">
+                        <a href="https://www.geeksforgeeks.org/" target="_blank" class="resource-link">
+                            <i class="fas fa-external-link-alt"></i>
+                            GeeksforGeeks
+                        </a>
+                        <p class="resource-description">Comprehensive DSA tutorials and practice problems</p>
+                    </li>
+                    <li class="resource-item">
+                        <a href="https://leetcode.com/" target="_blank" class="resource-link">
+                            <i class="fas fa-external-link-alt"></i>
+                            LeetCode
+                        </a>
+                        <p class="resource-description">Coding interview preparation platform</p>
+                    </li>
+                    <li class="resource-item">
+                        <a href="https://www.hackerrank.com/" target="_blank" class="resource-link">
+                            <i class="fas fa-external-link-alt"></i>
+                            HackerRank
+                        </a>
+                        <p class="resource-description">Practice coding, prepare for interviews</p>
+                    </li>
+                    <li class="resource-item">
+                        <a href="https://visualgo.net/" target="_blank" class="resource-link">
+                            <i class="fas fa-external-link-alt"></i>
+                            VisuAlgo
+                        </a>
+                        <p class="resource-description">Visualizing data structures and algorithms</p>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Web Development -->
+            <div class="resource-category">
+                <div class="category-header">
+                    <i class="fas fa-globe category-icon"></i>
+                    <h2 class="category-title">Web Development</h2>
+                </div>
+                <ul class="resource-list">
+                    <li class="resource-item">
+                        <a href="https://developer.mozilla.org/" target="_blank" class="resource-link">
+                            <i class="fas fa-external-link-alt"></i>
+                            MDN Web Docs
+                        </a>
+                        <p class="resource-description">Complete web development documentation</p>
+                    </li>
+                    <li class="resource-item">
+                        <a href="https://javascript.info/" target="_blank" class="resource-link">
+                            <i class="fas fa-external-link-alt"></i>
+                            JavaScript.info
+                        </a>
+                        <p class="resource-description">Modern JavaScript tutorial</p>
+                    </li>
+                    <li class="resource-item">
+                        <a href="https://www.theodinproject.com/" target="_blank" class="resource-link">
+                            <i class="fas fa-external-link-alt"></i>
+                            The Odin Project
+                        </a>
+                        <p class="resource-description">Full stack web development curriculum</p>
+                    </li>
+                    <li class="resource-item">
+                        <a href="https://css-tricks.com/" target="_blank" class="resource-link">
+                            <i class="fas fa-external-link-alt"></i>
+                            CSS-Tricks
+                        </a>
+                        <p class="resource-description">CSS tips, tricks, and techniques</p>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Cybersecurity & Ethical Hacking -->
+            <div class="resource-category">
+                <div class="category-header">
+                    <i class="fas fa-shield-alt category-icon"></i>
+                    <h2 class="category-title">Cybersecurity & Ethical Hacking</h2>
+                </div>
+                <ul class="resource-list">
+                    <li class="resource-item">
+                        <a href="https://www.hackthebox.com/" target="_blank" class="resource-link">
+                            <i class="fas fa-external-link-alt"></i>
+                            Hack The Box
+                        </a>
+                        <p class="resource-description">Penetration testing labs</p>
+                    </li>
+                    <li class="resource-item">
+                        <a href="https://tryhackme.com/" target="_blank" class="resource-link">
+                            <i class="fas fa-external-link-alt"></i>
+                            TryHackMe
+                        </a>
+                        <p class="resource-description">Learn cybersecurity through hands-on exercises</p>
+                    </li>
+                    <li class="resource-item">
+                        <a href="https://overthewire.org/wargames/" target="_blank" class="resource-link">
+                            <i class="fas fa-external-link-alt"></i>
+                            OverTheWire
+                        </a>
+                        <p class="resource-description">War games to learn security concepts</p>
+                    </li>
+                    <li class="resource-item">
+                        <a href="https://www.cybrary.it/" target="_blank" class="resource-link">
+                            <i class="fas fa-external-link-alt"></i>
+                            Cybrary
+                        </a>
+                        <p class="resource-description">Free cybersecurity training courses</p>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Documentation & References -->
+            <div class="resource-category">
+                <div class="category-header">
+                    <i class="fas fa-book category-icon"></i>
+                    <h2 class="category-title">Documentation & References</h2>
+                </div>
+                <ul class="resource-list">
+                    <li class="resource-item">
+                        <a href="https://devdocs.io/" target="_blank" class="resource-link">
+                            <i class="fas fa-external-link-alt"></i>
+                            DevDocs
+                        </a>
+                        <p class="resource-description">API documentation browser</p>
+                    </li>
+                    <li class="resource-item">
+                        <a href="https://stackoverflow.com/" target="_blank" class="resource-link">
+                            <i class="fas fa-external-link-alt"></i>
+                            Stack Overflow
+                        </a>
+                        <p class="resource-description">Q&A for programmers</p>
+                    </li>
+                    <li class="resource-item">
+                        <a href="https://github.com/" target="_blank" class="resource-link">
+                            <i class="fas fa-external-link-alt"></i>
+                            GitHub
+                        </a>
+                        <p class="resource-description">Code hosting and version control</p>
+                    </li>
+                    <li class="resource-item">
+                        <a href="https://roadmap.sh/" target="_blank" class="resource-link">
+                            <i class="fas fa-external-link-alt"></i>
+                            Roadmap.sh
+                        </a>
+                        <p class="resource-description">Developer roadmaps and guides</p>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Online Courses & Video Tutorials -->
+            <div class="resource-category">
+                <div class="category-header">
+                    <i class="fas fa-video category-icon"></i>
+                    <h2 class="category-title">Online Courses & Videos</h2>
+                </div>
+                <ul class="resource-list">
+                    <li class="resource-item">
+                        <a href="https://www.coursera.org/" target="_blank" class="resource-link">
+                            <i class="fas fa-external-link-alt"></i>
+                            Coursera
+                        </a>
+                        <p class="resource-description">University-level courses online</p>
+                    </li>
+                    <li class="resource-item">
+                        <a href="https://www.udemy.com/" target="_blank" class="resource-link">
+                            <i class="fas fa-external-link-alt"></i>
+                            Udemy
+                        </a>
+                        <p class="resource-description">Wide range of programming courses</p>
+                    </li>
+                    <li class="resource-item">
+                        <a href="https://www.youtube.com/@freecodecamp" target="_blank" class="resource-link">
+                            <i class="fas fa-external-link-alt"></i>
+                            freeCodeCamp YouTube
+                        </a>
+                        <p class="resource-description">Free coding tutorials and full courses</p>
+                    </li>
+                    <li class="resource-item">
+                        <a href="https://www.khanacademy.org/computing" target="_blank" class="resource-link">
+                            <i class="fas fa-external-link-alt"></i>
+                            Khan Academy
+                        </a>
+                        <p class="resource-description">Free computer science courses</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Muhammad Zargham Abbas. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="skills.html">Skills</a>
+            <a href="education.html">Education</a>
+            <a href="resources.html">Resources</a>
+        </div>
+    </footer>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+
+        // Check for saved theme preference or default to dark mode
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        if (currentTheme === 'light') {
+            body.classList.add('light-mode');
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            
+            if (body.classList.contains('light-mode')) {
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                localStorage.setItem('theme', 'light');
+            } else {
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenu = document.getElementById('mobileMenu');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenu.addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Smooth scroll for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
