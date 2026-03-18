@@ -1,5 +1,6 @@
 const menuToggle = document.getElementById('menuToggle');
 const navLinks = document.getElementById('navLinks');
+const themeToggle = document.getElementById('themeToggle');
 
 if (menuToggle && navLinks) {
   menuToggle.addEventListener('click', () => {
@@ -12,6 +13,26 @@ if (menuToggle && navLinks) {
       navLinks.classList.remove('open');
       menuToggle.setAttribute('aria-expanded', 'false');
     });
+  });
+}
+
+const htmlRoot = document.documentElement;
+const storedTheme = localStorage.getItem('portfolio-theme');
+
+if (storedTheme === 'light') {
+  htmlRoot.setAttribute('data-theme', 'light');
+  if (themeToggle) {
+    themeToggle.textContent = '🌞';
+  }
+}
+
+if (themeToggle) {
+  themeToggle.addEventListener('click', () => {
+    const current = htmlRoot.getAttribute('data-theme');
+    const next = current === 'light' ? 'dark' : 'light';
+    htmlRoot.setAttribute('data-theme', next);
+    localStorage.setItem('portfolio-theme', next);
+    themeToggle.textContent = next === 'light' ? '🌞' : '🌙';
   });
 }
 
@@ -35,10 +56,53 @@ if (skillsSection && meterFills.length) {
         }
       });
     },
-    { threshold: 0.4 }
+    { threshold: 0.38 }
   );
 
   observer.observe(skillsSection);
+}
+
+const revealItems = document.querySelectorAll('.reveal');
+if (revealItems.length) {
+  const revealObserver = new IntersectionObserver(
+    (entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          obs.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.18 }
+  );
+
+  revealItems.forEach((item) => revealObserver.observe(item));
+}
+
+const projectFilters = document.getElementById('projectFilters');
+const projectCards = document.querySelectorAll('.project-card');
+
+if (projectFilters && projectCards.length) {
+  projectFilters.addEventListener('click', (event) => {
+    const target = event.target;
+    if (!(target instanceof HTMLButtonElement)) {
+      return;
+    }
+
+    const filter = target.dataset.filter;
+    if (!filter) {
+      return;
+    }
+
+    projectFilters.querySelectorAll('.filter-btn').forEach((btn) => btn.classList.remove('active'));
+    target.classList.add('active');
+
+    projectCards.forEach((card) => {
+      const category = card.dataset.category;
+      const show = filter === 'all' || category === filter;
+      card.classList.toggle('hidden', !show);
+    });
+  });
 }
 
 const terminalOutput = document.getElementById('terminalOutput');
@@ -48,24 +112,34 @@ const terminalInput = document.getElementById('terminalInput');
 const terminalCommands = {
   help: [
     'Available commands:',
-    'help    - List all commands',
-    'bio     - Quick profile summary',
-    'skills  - Technical highlights',
-    'contact - Contact details',
-    'clear   - Clear terminal output'
+    'help     - List all commands',
+    'bio      - About Muhammad Zargham Abbas',
+    'skills   - Skill overview',
+    'contact  - Contact information',
+    'github   - Open GitHub profile',
+    'clear    - Clear terminal output'
   ],
   bio: [
-    'Zargham is a Data Scientist & Cyber Security Specialist.',
-    'Focus: AI systems, automation, and ethical hacking.'
+    'Name: Muhammad Zargham Abbas',
+    'Role: Data Science Student (2nd Semester)',
+    'University: University of Layyah',
+    'Location: Layyah, Pakistan',
+    'Also learning as a beginner ethical hacker.'
   ],
   skills: [
-    'Data Science: Python, Pandas, TensorFlow',
-    'Security: OSINT, Pentesting, Vulnerability Analysis',
-    'Web: Modern HTML, CSS, JavaScript, performance-first UI'
+    'Python & Data Analysis',
+    'Pandas / NumPy / ML basics',
+    'OSINT and Pentesting fundamentals',
+    'Modern frontend (HTML, CSS, JavaScript)'
   ],
   contact: [
-    'Email: zargham@zargham.me',
-    'Website: https://zargham.me'
+    'Email: abbaszargham730@gmail.com',
+    'Website: https://zargham.me',
+    'GitHub: https://github.com/Zhvsjzv'
+  ],
+  github: [
+    'Opening GitHub profile...',
+    'https://github.com/Zhvsjzv'
   ]
 };
 
@@ -93,7 +167,7 @@ const typeLine = async (text, className = '') => {
   for (const char of text) {
     row.textContent += char;
     terminalOutput.scrollTop = terminalOutput.scrollHeight;
-    await wait(14);
+    await wait(10);
   }
 };
 
@@ -119,6 +193,12 @@ const runTerminalCommand = async (rawCommand) => {
   for (const line of response) {
     await typeLine(line);
   }
+
+  if (command === 'github') {
+    setTimeout(() => {
+      window.open('https://github.com/Zhvsjzv', '_blank', 'noopener,noreferrer');
+    }, 420);
+  }
 };
 
 const bootTerminal = async () => {
@@ -126,7 +206,7 @@ const bootTerminal = async () => {
     return;
   }
 
-  await typeLine('Welcome to Zargham interactive terminal.');
+  await typeLine('Welcome to Muhammad Zargham Abbas interactive terminal.');
   await typeLine('Type "help" to get started.');
 };
 
@@ -257,4 +337,69 @@ if (contactForm) {
       }
     }
   });
+}
+
+const particleCanvas = document.getElementById('particleCanvas');
+
+if (particleCanvas instanceof HTMLCanvasElement) {
+  const context = particleCanvas.getContext('2d');
+
+  if (context) {
+    const particles = [];
+    let width = 0;
+    let height = 0;
+
+    const createParticles = (count) => {
+      particles.length = 0;
+      for (let index = 0; index < count; index += 1) {
+        particles.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          radius: 1 + Math.random() * 2,
+          vx: (Math.random() - 0.5) * 0.25,
+          vy: (Math.random() - 0.5) * 0.25
+        });
+      }
+    };
+
+    const resizeCanvas = () => {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      particleCanvas.width = width;
+      particleCanvas.height = height;
+      const count = Math.min(90, Math.floor((width * height) / 22000));
+      createParticles(count);
+    };
+
+    const drawParticles = () => {
+      context.clearRect(0, 0, width, height);
+
+      const theme = htmlRoot.getAttribute('data-theme');
+      const fillColor = theme === 'light' ? 'rgba(0, 120, 160, 0.35)' : 'rgba(0, 229, 255, 0.45)';
+
+      particles.forEach((particle) => {
+        particle.x += particle.vx;
+        particle.y += particle.vy;
+
+        if (particle.x < 0 || particle.x > width) {
+          particle.vx *= -1;
+        }
+
+        if (particle.y < 0 || particle.y > height) {
+          particle.vy *= -1;
+        }
+
+        context.beginPath();
+        context.fillStyle = fillColor;
+        context.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+        context.fill();
+      });
+
+      requestAnimationFrame(drawParticles);
+    };
+
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    drawParticles();
+  }
 }

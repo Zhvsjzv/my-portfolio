@@ -1,19 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Zargham - Data Scientist & Cyber Security Specialist portfolio." />
-  <title>Zargham.me | Portfolio</title>
+  <meta
+    name="description"
+    content="Muhammad Zargham Abbas - Data Science student, beginner ethical hacker, and builder of modern web projects."
+  />
+  <title>Zargham.me | Muhammad Zargham Abbas</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <canvas id="particleCanvas" aria-hidden="true"></canvas>
+
   <header class="navbar" id="top">
     <div class="nav-shell">
       <a href="#top" class="brand">Zargham.me</a>
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
       <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
       <nav class="nav-links" id="navLinks">
         <a href="#about">About</a>
@@ -26,136 +35,165 @@
   </header>
 
   <main>
-    <section class="hero section" id="about">
+    <section class="hero section reveal" id="about">
       <div class="hero-content">
-        <p class="eyebrow">Premium Portfolio</p>
-        <h1>ZARGHAM - Data Scientist &amp; Cyber Security Specialist</h1>
-        <p class="subtitle">Focused on AI systems, automation workflows, and ethical hacking strategies for real-world security and growth.</p>
-        <a href="#projects" class="btn btn-primary">Explore Projects</a>
+        <p class="eyebrow">University of Layyah • 2nd Semester</p>
+        <h1>Muhammad Zargham Abbas</h1>
+        <p class="hero-title">Data Science Student • Beginner Ethical Hacker</p>
+        <p class="subtitle">
+          I am a passionate student from Layyah, Pakistan. I study Data Science at the University of Layyah,
+          build practical projects, and explore ethical hacking with a strong learning mindset.
+        </p>
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-primary">Explore Projects</a>
+          <a href="https://github.com/Zhvsjzv" target="_blank" rel="noopener noreferrer" class="btn btn-outline">GitHub Profile</a>
+        </div>
       </div>
       <aside class="hero-panel">
-        <h2>Core Focus</h2>
+        <h2>Quick Profile</h2>
         <ul>
-          <li>Machine Learning Pipelines</li>
-          <li>Security Automation</li>
-          <li>OSINT Investigations</li>
-          <li>Secure Web Engineering</li>
+          <li><strong>Location:</strong> Layyah, Pakistan</li>
+          <li><strong>University:</strong> University of Layyah</li>
+          <li><strong>Field:</strong> Data Science (2nd Semester)</li>
+          <li><strong>Email:</strong> abbaszargham730@gmail.com</li>
         </ul>
       </aside>
     </section>
 
-    <section class="skills section" id="skills">
+    <section class="stats section reveal" aria-label="Highlights">
+      <article class="stat-card">
+        <h3>2nd</h3>
+        <p>Semester in Data Science</p>
+      </article>
+      <article class="stat-card">
+        <h3>6+</h3>
+        <p>Hands-on Learning Projects</p>
+      </article>
+      <article class="stat-card">
+        <h3>24/7</h3>
+        <p>Growth & Skill Development Mindset</p>
+      </article>
+    </section>
+
+    <section class="skills section reveal" id="skills">
       <h2>Skills Showcase</h2>
       <div class="skills-grid">
         <article class="skill-card">
-          <h3>Data Science &amp; Python</h3>
-          <p>Pandas, NumPy, TensorFlow, data analysis, predictive modeling, and production-ready ML workflows.</p>
+          <h3>Data Science & Python</h3>
+          <p>Learning and building with Python, Pandas, NumPy, data handling, and ML foundations.</p>
           <div class="skill-meter">
-            <div class="meter-label"><span>Python / Pandas</span><span>95%</span></div>
-            <div class="meter-track"><span class="meter-fill" data-level="95"></span></div>
+            <div class="meter-label"><span>Python</span><span>82%</span></div>
+            <div class="meter-track"><span class="meter-fill" data-level="82"></span></div>
           </div>
           <div class="skill-meter">
-            <div class="meter-label"><span>TensorFlow</span><span>88%</span></div>
-            <div class="meter-track"><span class="meter-fill" data-level="88"></span></div>
+            <div class="meter-label"><span>Pandas / Data Analysis</span><span>78%</span></div>
+            <div class="meter-track"><span class="meter-fill" data-level="78"></span></div>
           </div>
         </article>
 
         <article class="skill-card">
           <h3>Ethical Hacking</h3>
-          <p>OSINT research, vulnerability assessment, penetration testing, and responsible disclosure reporting.</p>
+          <p>Beginner-level ethical hacking journey with OSINT, security basics, and pentesting practice labs.</p>
           <div class="skill-meter">
-            <div class="meter-label"><span>OSINT</span><span>91%</span></div>
-            <div class="meter-track"><span class="meter-fill" data-level="91"></span></div>
+            <div class="meter-label"><span>OSINT</span><span>70%</span></div>
+            <div class="meter-track"><span class="meter-fill" data-level="70"></span></div>
           </div>
           <div class="skill-meter">
-            <div class="meter-label"><span>Pentesting</span><span>87%</span></div>
-            <div class="meter-track"><span class="meter-fill" data-level="87"></span></div>
+            <div class="meter-label"><span>Pentesting Basics</span><span>65%</span></div>
+            <div class="meter-track"><span class="meter-fill" data-level="65"></span></div>
           </div>
         </article>
 
         <article class="skill-card">
           <h3>Advanced Web Tech</h3>
-          <p>Modern HTML, CSS, JavaScript, performance optimization, secure APIs, and scalable frontend architecture.</p>
+          <p>Modern HTML, CSS, JavaScript and smooth UI implementation for responsive portfolio experiences.</p>
           <div class="skill-meter">
-            <div class="meter-label"><span>Frontend Engineering</span><span>92%</span></div>
-            <div class="meter-track"><span class="meter-fill" data-level="92"></span></div>
+            <div class="meter-label"><span>HTML / CSS</span><span>86%</span></div>
+            <div class="meter-track"><span class="meter-fill" data-level="86"></span></div>
           </div>
           <div class="skill-meter">
-            <div class="meter-label"><span>Security Practices</span><span>90%</span></div>
-            <div class="meter-track"><span class="meter-fill" data-level="90"></span></div>
+            <div class="meter-label"><span>JavaScript</span><span>75%</span></div>
+            <div class="meter-track"><span class="meter-fill" data-level="75"></span></div>
           </div>
         </article>
       </div>
     </section>
 
-    <section class="projects section" id="projects">
+    <section class="projects section reveal" id="projects">
       <div class="section-head">
         <h2>Projects Grid</h2>
+        <div class="filters" id="projectFilters">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="data">Data Science</button>
+          <button class="filter-btn" data-filter="security">Security</button>
+          <button class="filter-btn" data-filter="web">Web</button>
+        </div>
       </div>
-      <div class="project-grid">
-        <article class="project-card">
-          <h3>Threat Intelligence Dashboard</h3>
-          <p>Live cyber-threat monitoring panel that aggregates alerts and classifies attack vectors.</p>
-          <div class="tags"><span>Python</span><span>Flask</span><span>Chart.js</span></div>
+
+      <div class="project-grid" id="projectGrid">
+        <article class="project-card" data-category="web">
+          <h3>Personal Portfolio Website</h3>
+          <p>My advanced personal portfolio with smooth animations, terminal simulation, and responsive layout.</p>
+          <div class="tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
           <div class="project-actions">
-            <a href="#" class="btn btn-outline">View Code</a>
-            <a href="#" class="btn btn-primary">Live Demo</a>
+            <a href="https://github.com/Zhvsjzv/my-portfolio" target="_blank" rel="noopener noreferrer" class="btn btn-outline">View Code</a>
+            <a href="https://zargham.me" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Live Demo</a>
           </div>
         </article>
 
-        <article class="project-card">
-          <h3>AI Fraud Detection</h3>
-          <p>Machine learning model to detect suspicious transaction patterns with explainable outputs.</p>
-          <div class="tags"><span>TensorFlow</span><span>Pandas</span><span>FastAPI</span></div>
+        <article class="project-card" data-category="data">
+          <h3>Student Data Analysis Mini Lab</h3>
+          <p>Practice project for cleaning, exploring, and visualizing student data using Python and Pandas.</p>
+          <div class="tags"><span>Python</span><span>Pandas</span><span>Matplotlib</span></div>
           <div class="project-actions">
-            <a href="#" class="btn btn-outline">View Code</a>
-            <a href="#" class="btn btn-primary">Live Demo</a>
+            <a href="https://github.com/Zhvsjzv" target="_blank" rel="noopener noreferrer" class="btn btn-outline">View Code</a>
+            <a href="https://github.com/Zhvsjzv" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Live Demo</a>
           </div>
         </article>
 
-        <article class="project-card">
-          <h3>OSINT Recon Suite</h3>
-          <p>Automation toolkit for open-source intelligence collection and profile correlation workflows.</p>
-          <div class="tags"><span>Python</span><span>OSINT</span><span>Automation</span></div>
+        <article class="project-card" data-category="security">
+          <h3>OSINT Learning Toolkit</h3>
+          <p>Beginner-friendly toolkit for OSINT workflows, profile footprint checks, and public-source analysis.</p>
+          <div class="tags"><span>OSINT</span><span>Security</span><span>Automation</span></div>
           <div class="project-actions">
-            <a href="#" class="btn btn-outline">View Code</a>
-            <a href="#" class="btn btn-primary">Live Demo</a>
+            <a href="https://github.com/Zhvsjzv" target="_blank" rel="noopener noreferrer" class="btn btn-outline">View Code</a>
+            <a href="https://github.com/Zhvsjzv" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Live Demo</a>
           </div>
         </article>
 
-        <article class="project-card">
-          <h3>Secure Chat Platform</h3>
-          <p>Encrypted real-time communication app with role-based access and monitoring controls.</p>
-          <div class="tags"><span>WebSocket</span><span>Node.js</span><span>Security</span></div>
+        <article class="project-card" data-category="web">
+          <h3>Interactive Terminal Portfolio</h3>
+          <p>JavaScript-driven terminal with custom commands, typing simulation, and smooth command responses.</p>
+          <div class="tags"><span>ES6+</span><span>UI/UX</span><span>Frontend</span></div>
           <div class="project-actions">
-            <a href="#" class="btn btn-outline">View Code</a>
-            <a href="#" class="btn btn-primary">Live Demo</a>
+            <a href="https://github.com/Zhvsjzv/my-portfolio" target="_blank" rel="noopener noreferrer" class="btn btn-outline">View Code</a>
+            <a href="https://zargham.me" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Live Demo</a>
           </div>
         </article>
 
-        <article class="project-card">
-          <h3>Automation Command Center</h3>
-          <p>Custom workflow orchestration for repetitive business tasks and process observability.</p>
-          <div class="tags"><span>JavaScript</span><span>APIs</span><span>DevOps</span></div>
+        <article class="project-card" data-category="data">
+          <h3>Semester Learning Tracker</h3>
+          <p>Dashboard-style project to track semester goals, skills growth, and coding practice milestones.</p>
+          <div class="tags"><span>JavaScript</span><span>Charts</span><span>Data</span></div>
           <div class="project-actions">
-            <a href="#" class="btn btn-outline">View Code</a>
-            <a href="#" class="btn btn-primary">Live Demo</a>
+            <a href="https://github.com/Zhvsjzv" target="_blank" rel="noopener noreferrer" class="btn btn-outline">View Code</a>
+            <a href="https://github.com/Zhvsjzv" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Live Demo</a>
           </div>
         </article>
 
-        <article class="project-card">
-          <h3>Web Vulnerability Scanner</h3>
-          <p>Automated scanner that performs baseline security checks and produces remediation reports.</p>
-          <div class="tags"><span>Pentesting</span><span>Python</span><span>CLI</span></div>
+        <article class="project-card" data-category="security">
+          <h3>Ethical Hacking Notes Hub</h3>
+          <p>Organized notes and practice roadmap for legal ethical hacking learning and vulnerability basics.</p>
+          <div class="tags"><span>Pentesting</span><span>Notes</span><span>Cybersecurity</span></div>
           <div class="project-actions">
-            <a href="#" class="btn btn-outline">View Code</a>
-            <a href="#" class="btn btn-primary">Live Demo</a>
+            <a href="https://github.com/Zhvsjzv" target="_blank" rel="noopener noreferrer" class="btn btn-outline">View Code</a>
+            <a href="https://github.com/Zhvsjzv" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Live Demo</a>
           </div>
         </article>
       </div>
     </section>
 
-    <section class="terminal section" id="terminal">
+    <section class="terminal section reveal" id="terminal">
       <h2>Interactive Terminal</h2>
       <div class="terminal-window" aria-live="polite">
         <div class="terminal-head">
@@ -167,32 +205,42 @@
         <div class="terminal-body" id="terminalOutput"></div>
         <form id="terminalForm" class="terminal-input-row" autocomplete="off">
           <label for="terminalInput" class="prompt">$</label>
-          <input id="terminalInput" name="terminalInput" type="text" placeholder="Type: help" />
+          <input id="terminalInput" name="terminalInput" type="text" placeholder="Try: help, bio, skills, github, contact" />
           <span class="cursor" aria-hidden="true"></span>
         </form>
       </div>
     </section>
 
-    <section class="contact section" id="contact">
+    <section class="contact section reveal" id="contact">
       <h2>Contact</h2>
-      <form class="contact-form" id="contactForm" novalidate>
-        <div class="form-row">
-          <label for="name">Name</label>
-          <input type="text" id="name" name="name" required />
-          <small class="error" data-for="name"></small>
-        </div>
-        <div class="form-row">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" required />
-          <small class="error" data-for="email"></small>
-        </div>
-        <div class="form-row">
-          <label for="message">Message</label>
-          <textarea id="message" name="message" rows="5" required></textarea>
-          <small class="error" data-for="message"></small>
-        </div>
-        <button type="submit" class="btn btn-primary" id="submitBtn">Send Message</button>
-      </form>
+      <div class="contact-grid">
+        <form class="contact-form" id="contactForm" novalidate>
+          <div class="form-row">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required />
+            <small class="error" data-for="name"></small>
+          </div>
+          <div class="form-row">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required />
+            <small class="error" data-for="email"></small>
+          </div>
+          <div class="form-row">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+            <small class="error" data-for="message"></small>
+          </div>
+          <button type="submit" class="btn btn-primary" id="submitBtn">Send Message</button>
+        </form>
+
+        <aside class="contact-card">
+          <h3>Direct Links</h3>
+          <a href="mailto:abbaszargham730@gmail.com">abbaszargham730@gmail.com</a>
+          <a href="https://github.com/Zhvsjzv" target="_blank" rel="noopener noreferrer">github.com/Zhvsjzv</a>
+          <a href="https://zargham.me" target="_blank" rel="noopener noreferrer">zargham.me</a>
+          <a href="#projects">View all projects</a>
+        </aside>
+      </div>
     </section>
   </main>
 
