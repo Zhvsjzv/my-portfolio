@@ -1,0 +1,828 @@
+/*
+  ============================================================
+  Zargham Chat — style.css
+  Mobile-first dark glassmorphism UI
+  No external fonts or CDN — 100% offline compatible.
+  ============================================================
+*/
+
+/* ── Reset ────────────────────────────────────────────────── */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ── Design tokens ────────────────────────────────────────── */
+:root {
+  /* Backgrounds */
+  --bg:           #0a0a0a;
+  --surface:      #111111;
+  --glass:        rgba(255, 255, 255, 0.045);
+  --glass-hover:  rgba(255, 255, 255, 0.08);
+  --glass-active: rgba(255, 255, 255, 0.12);
+
+  /* Borders */
+  --border:       rgba(255, 255, 255, 0.08);
+  --border-focus: rgba(0, 255, 136, 0.5);
+
+  /* Text */
+  --text:         #e8e8e8;
+  --text-muted:   #606060;
+  --text-dim:     #404040;
+
+  /* Accent — neon green */
+  --neon:         #00ff88;
+  --neon-dim:     rgba(0, 255, 136, 0.12);
+  --neon-glow:    0 0 18px rgba(0, 255, 136, 0.4);
+
+  /* Bubbles */
+  --bubble-out:   rgba(0, 255, 136, 0.13);
+  --bubble-in:    rgba(255, 255, 255, 0.055);
+
+  /* Radius */
+  --r:            14px;
+  --r-sm:         8px;
+
+  /* Font */
+  --font:         'Segoe UI', system-ui, -apple-system, sans-serif;
+
+  /* Sidebar width on desktop */
+  --sidebar-w:    260px;
+}
+
+/* ── Base ─────────────────────────────────────────────────── */
+html {
+  /*
+    100dvh = dynamic viewport height.
+    On mobile Chrome, this shrinks when the soft keyboard opens,
+    preventing the input bar from hiding behind the keyboard.
+    Falls back to 100vh on older browsers.
+  */
+  height: 100%;
+}
+
+body {
+  font-family: var(--font);
+  font-size: 14px;
+  background: var(--bg);
+  color: var(--text);
+  /* Fill the full screen including when keyboard is open */
+  height: 100%;
+  overflow: hidden;
+  line-height: 1.5;
+}
+
+/* ── Utility ──────────────────────────────────────────────── */
+.hidden { display: none !important; }
+
+/* ── Custom scrollbar ──────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 255, 136, 0.25);
+  border-radius: 99px;
+}
+
+/* ── Glassmorphism card ───────────────────────────────────── */
+.glass-card {
+  background: rgba(12, 12, 12, 0.85);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border: 1px solid rgba(0, 255, 136, 0.18);
+  border-radius: 20px;
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   LOGIN SCREEN
+════════════════════════════════════════════════════════════ */
+.login-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Subtle radial neon glow in the background */
+  background:
+    radial-gradient(ellipse at 30% 25%, rgba(0, 255, 136, 0.06) 0%, transparent 55%),
+    radial-gradient(ellipse at 75% 75%, rgba(0, 180, 100, 0.04) 0%, transparent 55%),
+    var(--bg);
+  padding: 20px;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  padding: 44px 36px;
+  text-align: center;
+  box-shadow:
+    0 0 60px rgba(0, 255, 136, 0.07),
+    0 30px 80px rgba(0, 0, 0, 0.7);
+  animation: fadeUp 0.45s ease both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+.login-logo {
+  font-size: 52px;
+  font-weight: 900;
+  letter-spacing: -3px;
+  background: linear-gradient(135deg, #00ff88 0%, #00cc66 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 22px rgba(0, 255, 136, 0.55));
+  margin-bottom: 8px;
+}
+
+.login-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.login-sub {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+  letter-spacing: 0.3px;
+}
+
+.login-error {
+  background: rgba(255, 80, 80, 0.12);
+  border: 1px solid rgba(255, 80, 80, 0.35);
+  color: #ff6b6b;
+  padding: 10px 14px;
+  border-radius: var(--r-sm);
+  font-size: 13px;
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+/* ── Form fields ─────────────────────────────────────────── */
+.field-group {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.field-label {
+  display: block;
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 8px;
+}
+
+.field-input {
+  width: 100%;
+  padding: 13px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  color: var(--text);
+  font-size: 14px;
+  font-family: var(--font);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.field-input::placeholder { color: var(--text-dim); }
+
+.field-input:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px rgba(0, 255, 136, 0.08);
+}
+
+/* ── Buttons ─────────────────────────────────────────────── */
+.btn-primary {
+  width: 100%;
+  padding: 13px;
+  background: linear-gradient(135deg, #00ff88, #00cc66);
+  color: #0a0a0a;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: var(--font);
+  border: none;
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  letter-spacing: 0.3px;
+  transition: filter 0.2s, box-shadow 0.2s;
+}
+
+.btn-primary:hover {
+  filter: brightness(1.1);
+  box-shadow: var(--neon-glow);
+}
+
+.btn-primary:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  filter: none;
+  box-shadow: none;
+}
+
+/* Icon-only round button */
+.icon-btn {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  border-radius: var(--r-sm);
+  color: var(--text-muted);
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.icon-btn:hover {
+  background: var(--glass-hover);
+  color: var(--text);
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   APP LAYOUT
+   Uses a full-height flex row so sidebar + chat fill the screen.
+   On mobile the sidebar overlays as a drawer.
+════════════════════════════════════════════════════════════ */
+.app {
+  display: flex;
+  /* Use 100dvh — shrinks when mobile keyboard is open */
+  height: 100dvh;
+  height: 100vh; /* fallback */
+  overflow: hidden;
+}
+
+
+/* ── Sidebar ──────────────────────────────────────────────── */
+.sidebar {
+  width: var(--sidebar-w);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  background: rgba(8, 8, 8, 0.92);
+  border-right: 1px solid var(--border);
+  /* Height fills the parent */
+  height: 100%;
+  overflow: hidden;
+  /* Smooth slide-in on mobile */
+  transition: transform 0.25s ease;
+}
+
+.sidebar-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 16px 14px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.sidebar-brand {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--neon);
+  text-shadow: 0 0 10px rgba(0, 255, 136, 0.4);
+  letter-spacing: -0.3px;
+}
+
+.sidebar-section-label {
+  padding: 14px 16px 6px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+  flex-shrink: 0;
+}
+
+/* ── User list ───────────────────────────────────────────── */
+.user-list {
+  list-style: none;
+  flex: 1;
+  overflow-y: auto;
+  padding: 4px 8px;
+}
+
+.user-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.15s;
+  margin-bottom: 2px;
+}
+
+.user-item:hover    { background: var(--glass-hover);  }
+.user-item.active   { background: var(--neon-dim);     }
+.user-item.unread   { border-left: 2px solid var(--neon); padding-left: 8px; }
+
+.user-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: #0a0a0a;
+  flex-shrink: 0;
+}
+
+.user-meta { flex: 1; min-width: 0; }
+
+.user-name-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user-you-badge {
+  font-size: 10px;
+  color: var(--text-dim);
+  margin-left: 4px;
+}
+
+.user-last-msg {
+  font-size: 11px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Green presence dot */
+.presence-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--neon);
+  box-shadow: 0 0 5px var(--neon);
+  flex-shrink: 0;
+}
+
+.sidebar-footer {
+  padding: 14px 16px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.my-dot {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: #0a0a0a;
+}
+
+.my-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+/* ── Chat Panel ──────────────────────────────────────────── */
+.chat-panel {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at top left, rgba(0, 255, 136, 0.025) 0%, transparent 55%),
+    var(--bg);
+}
+
+/* Empty state */
+.empty-state {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-dim);
+  gap: 14px;
+  text-align: center;
+  padding: 40px;
+}
+
+.empty-icon {
+  font-size: 52px;
+  opacity: 0.35;
+}
+
+/* Conversation wrapper */
+.conversation {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* ── Conversation header ─────────────────────────────────── */
+.conv-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px;
+  background: rgba(8, 8, 8, 0.75);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+  backdrop-filter: blur(8px);
+}
+
+.peer-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: #0a0a0a;
+  flex-shrink: 0;
+}
+
+.peer-info { flex: 1; min-width: 0; }
+
+.peer-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  display: block;
+}
+
+.peer-status {
+  font-size: 11px;
+  color: var(--neon);
+}
+
+
+/* ── Message list ────────────────────────────────────────── */
+.msg-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  /*
+    overscroll-behavior: contain stops the whole page from bouncing
+    on iOS/Android when the user scrolls past the top/bottom of the list.
+  */
+  overscroll-behavior: contain;
+}
+
+/* ── Message rows ────────────────────────────────────────── */
+.msg-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  max-width: 100%;
+}
+
+.msg-row.out { flex-direction: row-reverse; }
+
+.msg-row-avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  color: #0a0a0a;
+  flex-shrink: 0;
+}
+
+.msg-wrap {
+  display: flex;
+  flex-direction: column;
+  max-width: 65%;
+}
+
+.msg-row.out .msg-wrap { align-items: flex-end; }
+
+/* Sender name (only shown on incoming) */
+.msg-sender {
+  font-size: 10px;
+  font-weight: 600;
+  margin-bottom: 3px;
+  padding-left: 2px;
+}
+
+.msg-bubble {
+  padding: 9px 13px;
+  border-radius: var(--r);
+  font-size: 14px;
+  line-height: 1.55;
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+
+/* Incoming bubble */
+.msg-row.in  .msg-bubble {
+  background: var(--bubble-in);
+  border-radius: 4px var(--r) var(--r) var(--r);
+}
+
+/* Outgoing bubble */
+.msg-row.out .msg-bubble {
+  background: var(--bubble-out);
+  border: 1px solid rgba(0, 255, 136, 0.2);
+  border-radius: var(--r) 4px var(--r) var(--r);
+}
+
+.msg-meta {
+  font-size: 10px;
+  color: var(--text-dim);
+  margin-top: 4px;
+  padding: 0 2px;
+}
+
+.msg-row.out .msg-meta { text-align: right; }
+
+/* ── File attachment inside a bubble ─────────────────────── */
+.attach-img {
+  max-width: 220px;
+  max-height: 180px;
+  border-radius: 10px;
+  margin-top: 6px;
+  display: block;
+  cursor: zoom-in;
+}
+
+.attach-file {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: var(--r-sm);
+  color: var(--neon);
+  text-decoration: none;
+  font-size: 13px;
+  transition: background 0.15s;
+}
+
+.attach-file:hover { background: var(--neon-dim); }
+
+/* ── System message ──────────────────────────────────────── */
+.sys-msg {
+  text-align: center;
+  font-size: 11px;
+  color: var(--text-muted);
+  margin: 6px 0;
+}
+
+.sys-msg span {
+  background: rgba(255, 255, 255, 0.04);
+  padding: 3px 12px;
+  border-radius: 20px;
+}
+
+
+/* ── Typing bar ───────────────────────────────────────────── */
+.typing-bar {
+  min-height: 22px;
+  padding: 0 18px 4px;
+  font-size: 11px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.typing-dots {
+  display: flex;
+  gap: 3px;
+  align-items: center;
+}
+
+.typing-dots span {
+  display: block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--neon);
+  animation: blink 1s infinite;
+}
+
+.typing-dots span:nth-child(2) { animation-delay: 0.15s; }
+.typing-dots span:nth-child(3) { animation-delay: 0.30s; }
+
+@keyframes blink {
+  0%, 80%, 100% { transform: scale(0.7); opacity: 0.4; }
+  40%            { transform: scale(1.1); opacity: 1;   }
+}
+
+
+/* ── File preview pill ───────────────────────────────────── */
+.file-preview {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 14px 4px;
+  padding: 8px 14px;
+  background: var(--neon-dim);
+  border: 1px solid rgba(0, 255, 136, 0.28);
+  border-radius: var(--r-sm);
+  font-size: 13px;
+  color: var(--neon);
+  flex-shrink: 0;
+}
+
+.fp-name {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fp-cancel {
+  background: none;
+  border: none;
+  color: var(--neon);
+  cursor: pointer;
+  font-size: 15px;
+  line-height: 1;
+  padding: 0;
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   INPUT BAR
+   Uses flexbox to stay at the bottom of the conversation column.
+   On mobile, the whole column shrinks when the keyboard opens
+   because of 100dvh, so the input naturally stays visible.
+════════════════════════════════════════════════════════════ */
+.input-bar {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  padding: 10px 14px;
+  background: rgba(8, 8, 8, 0.8);
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;          /* never compress this row */
+  /* Ensure it's always at the bottom of the flex column */
+}
+
+.attach-btn { color: var(--text-muted); font-size: 18px; }
+.attach-btn:hover { color: var(--neon); background: var(--neon-dim); }
+
+.msg-input {
+  flex: 1;
+  min-width: 0;
+  padding: 10px 14px;
+  /* Min height = 1 line; max = ~3 lines  (JS grows it) */
+  min-height: 40px;
+  max-height: 110px;
+  resize: none;
+  font-size: 14px;
+  font-family: var(--font);
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  outline: none;
+  line-height: 1.5;
+  overflow-y: auto;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.msg-input::placeholder { color: var(--text-dim); }
+
+.msg-input:focus {
+  border-color: rgba(0, 255, 136, 0.4);
+  box-shadow: 0 0 0 2px rgba(0, 255, 136, 0.07);
+}
+
+.btn-send {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #00ff88, #00cc66);
+  color: #0a0a0a;
+  font-size: 17px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: filter 0.15s, box-shadow 0.15s;
+}
+
+.btn-send:hover    { filter: brightness(1.1); box-shadow: var(--neon-glow); }
+.btn-send:disabled { opacity: 0.35; cursor: not-allowed; filter: none; box-shadow: none; }
+
+
+/* ════════════════════════════════════════════════════════════
+   TOAST NOTIFICATION
+════════════════════════════════════════════════════════════ */
+.toast {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%) translateY(12px);
+  background: rgba(0, 255, 136, 0.1);
+  border: 1px solid rgba(0, 255, 136, 0.3);
+  color: var(--neon);
+  padding: 9px 20px;
+  border-radius: 30px;
+  font-size: 13px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s, transform 0.25s;
+  z-index: 9999;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   RESPONSIVE — Mobile  (≤ 680 px)
+   Sidebar becomes a slide-over drawer; chat panel fills full width.
+════════════════════════════════════════════════════════════ */
+@media (max-width: 680px) {
+
+  /* Hide sidebar by default — it slides in when .open is toggled */
+  .sidebar {
+    position: fixed;
+    inset: 0;
+    width: 80%;
+    max-width: 280px;
+    z-index: 50;
+    transform: translateX(-100%);
+  }
+
+  /* JS adds .open class to show it */
+  .sidebar.open { transform: translateX(0); }
+
+  /* Overlay behind open sidebar */
+  .sidebar-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 49;
+  }
+
+  /* Chat panel fills full width on mobile */
+  .chat-panel { width: 100%; }
+
+  /* Wider bubbles on small screens */
+  .msg-wrap { max-width: 82%; }
+
+  /* Show hamburger button */
+  .mob-only { display: flex !important; }
+
+  /* Slightly tighter avatar */
+  .msg-row-avatar { width: 22px; height: 22px; font-size: 9px; }
+}
+
+/* Hide hamburger on desktop */
+.mob-only { display: none; }
+
+/* Sidebar overlay only for mobile */
+.sidebar-overlay { display: none; }

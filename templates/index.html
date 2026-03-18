@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <!--
+    viewport: width=device-width prevents mobile zoom.
+    interactive-widget=resizes-content makes the layout shrink
+    correctly when the soft keyboard opens on Android Chrome.
+  -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <title>Zargham Chat</title>
+
+  <!-- All styles live in static/style.css -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════
+     LOGIN SCREEN
+     Shown when the user has no active session.
+     Hidden by JS after a successful /login POST.
+════════════════════════════════════════════════════════ -->
+<div id="loginScreen" class="login-screen {% if username %}hidden{% endif %}">
+  <div class="login-card glass-card">
+
+    <!-- Logo / Brand -->
+    <div class="login-logo">ZC</div>
+    <h1 class="login-title">Zargham Chat</h1>
+    <p class="login-sub">LAN Messenger &mdash; No internet required</p>
+
+    <!-- Error banner (populated by JS) -->
+    <div id="loginError" class="login-error hidden"></div>
+
+    <!-- Name field -->
+    <div class="field-group">
+      <label class="field-label" for="usernameInput">Display name</label>
+      <input
+        id="usernameInput"
+        class="field-input"
+        type="text"
+        placeholder="Enter your name…"
+        maxlength="24"
+        autocomplete="off"
+        autocorrect="off"
+        spellcheck="false"
+      />
+    </div>
+
+    <button id="joinBtn" class="btn-primary" onclick="doLogin()">
+      Join Chat
+    </button>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════
+     MAIN APP  (hidden until user logs in)
+════════════════════════════════════════════════════════ -->
+<div id="app" class="app {% if not username %}hidden{% endif %}">
+
+  <!-- ── Sidebar: online users ─────────────────────────── -->
+  <aside id="sidebar" class="sidebar">
+
+    <div class="sidebar-top">
+      <span class="sidebar-brand">Zargham Chat</span>
+      <!-- Logout button -->
+      <a href="/logout" class="icon-btn" title="Logout">&#x2715;</a>
+    </div>
+
+    <div class="sidebar-section-label">Online now</div>
+
+    <!-- User list populated by JS -->
+    <ul id="userList" class="user-list"></ul>
+
+    <!-- My identity footer -->
+    <div class="sidebar-footer">
+      <div class="my-dot" id="myDot"></div>
+      <span id="myLabel" class="my-label">Loading…</span>
+    </div>
+
+  </aside>
+
+  <!-- ── Chat Panel ─────────────────────────────────────── -->
+  <section id="chatPanel" class="chat-panel">
+
+    <!-- Empty state (no user selected) -->
+    <div id="emptyState" class="empty-state">
+      <div class="empty-icon">&#128172;</div>
+      <p>Select a user from the sidebar<br/>to start a private conversation.</p>
+    </div>
+
+    <!-- Active conversation (hidden until user selected) -->
+    <div id="conversation" class="conversation hidden">
+
+      <!-- Header -->
+      <div class="conv-header">
+        <!-- Hamburger: shows sidebar on mobile -->
+        <button class="icon-btn mob-only" id="sidebarToggle" onclick="toggleSidebar()">&#9776;</button>
+        <div id="peerAvatar" class="peer-avatar"></div>
+        <div class="peer-info">
+          <span id="peerName" class="peer-name"></span>
+          <span id="peerStatus" class="peer-status">Online</span>
+        </div>
+      </div>
+
+      <!-- Message list — scrollable -->
+      <div id="msgList" class="msg-list"></div>
+
+      <!-- Typing indicator row -->
+      <div id="typingBar" class="typing-bar"></div>
+
+      <!-- File preview pill (shows when a file is chosen) -->
+      <div id="filePreview" class="file-preview hidden">
+        <span class="fp-icon">&#128206;</span>
+        <span id="fpName" class="fp-name"></span>
+        <button class="fp-cancel" onclick="clearFile()">&#10005;</button>
+      </div>
+
+      <!-- Input bar — pinned to bottom -->
+      <div class="input-bar">
+        <!-- Attach -->
+        <button class="icon-btn attach-btn" title="Attach file"
+                onclick="document.getElementById('fileInput').click()">
+          &#128206;
+        </button>
+        <input id="fileInput" type="file"
+               accept="image/*,.pdf,.txt,.doc,.docx,.zip"
+               style="display:none"
+               onchange="onFileChosen(event)" />
+
+        <!-- Text area — auto-grows up to 3 lines -->
+        <textarea
+          id="msgInput"
+          class="msg-input"
+          rows="1"
+          placeholder="Message…"
+          onkeydown="onKey(event)"
+          oninput="onType()"
+        ></textarea>
+
+        <!-- Send -->
+        <button id="sendBtn" class="btn-send" onclick="sendMsg()">
+          &#10148;
+        </button>
+      </div>
+
+    </div><!-- /conversation -->
+
+  </section><!-- /chat-panel -->
+
+</div><!-- /app -->
+
+
+<!-- Toast notification -->
+<div id="toast" class="toast"></div>
+
+
+<!-- ════════════════════════════════════════════════════════
+     SCRIPTS
+
+     Socket.IO client is served by Flask-SocketIO itself at
+     /socket.io/socket.io.js — works 100% offline on LAN.
+════════════════════════════════════════════════════════ -->
+<script src="/socket.io/socket.io.js"></script>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+<!-- Pass Flask session data to JS safely -->
+<script>
+  // If the user is already logged in (Flask session exists),
+  // initialise the socket immediately so they don't have to
+  // refresh after the page load.
+  {% if username %}
+    window.__INITIAL_USERNAME__ = {{ username | tojson }};
+  {% else %}
+    window.__INITIAL_USERNAME__ = null;
+  {% endif %}
+</script>
+
+</body>
+</html>
