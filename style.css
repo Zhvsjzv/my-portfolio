@@ -6,6 +6,7 @@
   --muted: #a3afc2;
   --accent-green: #00ff00;
   --accent-blue: #8cdcff;
+  --cta-text: #041104;
   --border: rgba(140, 220, 255, 0.2);
 }
 
@@ -141,20 +142,22 @@ h1 {
 
 .price {
   margin-top: 1rem;
-  color: var(--accent-green) !important;
+  color: var(--accent-green);
   font-weight: 700;
   font-family: "Fira Code", ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
 .cta {
+  appearance: none;
   margin-top: 0.85rem;
   display: inline-block;
   width: 100%;
   text-align: center;
   padding: 0.72rem 0.9rem;
+  cursor: pointer;
   border-radius: 12px;
   border: 1px solid rgba(0, 255, 0, 0.5);
-  color: #041104;
+  color: var(--cta-text);
   background: linear-gradient(135deg, var(--accent-green), #85ff94);
   font-weight: 700;
   text-decoration: none;
@@ -164,6 +167,13 @@ h1 {
 .cta:hover {
   filter: brightness(1.06);
   box-shadow: 0 0 18px rgba(0, 255, 0, 0.3);
+}
+
+.cta:disabled {
+  cursor: not-allowed;
+  opacity: 0.75;
+  filter: grayscale(0.18);
+  box-shadow: none;
 }
 
 .footer {
@@ -181,7 +191,8 @@ h1 {
   margin-bottom: 0.7rem;
 }
 
-.socials a {
+.socials a,
+.social-icon {
   width: 42px;
   height: 42px;
   border-radius: 12px;
