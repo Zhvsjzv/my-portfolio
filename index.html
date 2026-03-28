@@ -84,13 +84,10 @@
       overflow: hidden;
     }
 
-    /* Avatar placeholder icon */
-    .avatar::after {
-      content: '</>';
-      font-family: 'Fira Code', monospace;
-      color: var(--accent-color);
-      font-size: 2rem;
-      font-weight: 700;
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .hero h1 {
@@ -242,7 +239,8 @@
     
     <header class="hero">
       <div class="avatar">
-        </div>
+        <img src="profile.jpg" alt="Zargham Abbas" />
+      </div>
       <h1>Zargham Abbas</h1>
       <p>Building premium Python automation and security tools so you don't have to.</p>
     </header>
@@ -273,7 +271,7 @@
           <span class="price">$10</span>
         </div>
         <p class="product-desc">Automatically extract hidden emails and contact info from any website. Perfect for agencies.</p>
-        <a href="#" target="_blank" class="btn">Get Instant Access</a>
+        <a href="https://zargham64.gumroad.com/l/xxjjo" target="_blank" class="btn">Get Instant Access</a>
       </article>
 
     </main>
