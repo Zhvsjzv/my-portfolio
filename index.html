@@ -1,251 +1,599 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en" class="dark">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta
-    name="description"
-    content="Muhammad Zargham Abbas - Data Science student, beginner ethical hacker, and builder of modern web projects."
-  />
-  <title>Zargham.me | Muhammad Zargham Abbas</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet"
-  />
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>zargham.me | Machine Learning & Cybersecurity</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        cinematic: ['Cinzel', 'serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        cinematic: {
+                            900: '#050505',
+                            800: '#0a0a0a',
+                            700: '#111111',
+                            accent: '#1e3a8a',
+                            glow: '#3b82f6',
+                        }
+                    },
+                    boxShadow: {
+                        'neon': '0 0 20px rgba(59, 130, 246, 0.3)',
+                        'neon-hover': '0 0 30px rgba(59, 130, 246, 0.6)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS -->
+    <style>
+        /* Cinematic Background Gradient */
+        body {
+            background: linear-gradient(-45deg, #050505, #111827, #000000, #0f172a);
+            background-size: 400% 400%;
+            animation: gradientBG 20s ease infinite;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* SPA Transitions */
+        .page {
+            display: none;
+            opacity: 0;
+            transform: scale(0.98) translateY(10px);
+            transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .page.active {
+            display: block;
+            animation: cinematicFadeIn 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+
+        @keyframes cinematicFadeIn {
+            from { opacity: 0; transform: scale(0.98) translateY(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        /* Glassmorphism Components */
+        .glass-panel {
+            background: rgba(17, 17, 17, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Glowing Text */
+        .glow-text {
+            text-shadow: 0 0 15px rgba(59, 130, 246, 0.5);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #334155; }
+
+        /* Matrix Canvas */
+        #matrix-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 9998;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        /* Screen Flash */
+        #flash-overlay {
+            position: fixed;
+            inset: 0;
+            background: white;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .flash-anim {
+            animation: flash 0.3s ease-out;
+        }
+        @keyframes flash {
+            0% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        /* Custom Override Alert */
+        #override-alert {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            background: rgba(0, 0, 0, 0.9);
+            border: 1px solid #0f0;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+            color: #0f0;
+            font-family: 'JetBrains Mono', monospace;
+            padding: 2rem;
+            z-index: 10000;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+        #override-alert.show {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+            pointer-events: auto;
+        }
+    </style>
 </head>
-<body>
-  <canvas id="particleCanvas" aria-hidden="true"></canvas>
+<body class="antialiased min-h-screen flex flex-col selection:bg-blue-900 selection:text-white">
 
-  <header class="navbar" id="top">
-    <div class="nav-shell">
-      <a href="#top" class="brand">Zargham.me</a>
-      <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
-      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
-      <nav class="nav-links" id="navLinks">
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#terminal">Terminal</a>
-        <a href="#contact">Contact</a>
-      </nav>
+    <!-- Screen Flash & Matrix Effects -->
+    <div id="flash-overlay"></div>
+    <canvas id="matrix-canvas"></canvas>
+    
+    <div id="override-alert" class="rounded text-center">
+        <i class="fa-solid fa-unlock-keyhole text-4xl mb-4 animate-pulse"></i>
+        <h2 class="text-xl font-bold mb-2">SYSTEM OVERRIDE SUCCESSFUL</h2>
+        <p class="text-sm opacity-80">Welcome to zargham.me</p>
     </div>
-  </header>
 
-  <main>
-    <section class="hero section reveal" id="about">
-      <div class="hero-content">
-        <p class="eyebrow">University of Layyah • 2nd Semester</p>
-        <h1>Muhammad Zargham Abbas</h1>
-        <p class="hero-title">Data Science Student • Beginner Ethical Hacker</p>
-        <p class="subtitle">
-          I am a passionate student from Layyah, Pakistan. I study Data Science at the University of Layyah,
-          build practical projects, and explore ethical hacking with a strong learning mindset.
-        </p>
-        <div class="hero-actions">
-          <a href="#projects" class="btn btn-primary">Explore Projects</a>
-          <a href="https://github.com/Zhvsjzv" target="_blank" rel="noopener noreferrer" class="btn btn-outline">GitHub Profile</a>
+    <!-- Navigation -->
+    <nav class="fixed w-full top-0 z-50 glass-panel border-b-0 border-white/5 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 cursor-pointer group" onclick="navigate('home')">
+                    <span class="font-cinematic text-2xl font-bold tracking-widest text-white group-hover:glow-text transition-all duration-300">
+                        zargham<span class="text-blue-500">.me</span>
+                    </span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-10">
+                    <button onclick="navigate('home')" class="nav-link text-sm font-medium tracking-widest uppercase text-gray-400 hover:text-white transition-colors duration-300">Home</button>
+                    <button onclick="navigate('about')" class="nav-link text-sm font-medium tracking-widest uppercase text-gray-400 hover:text-white transition-colors duration-300">About</button>
+                    <button onclick="navigate('experience')" class="nav-link text-sm font-medium tracking-widest uppercase text-gray-400 hover:text-white transition-colors duration-300">Experience</button>
+                    <button onclick="navigate('contact')" class="nav-link text-sm font-medium tracking-widest uppercase text-gray-400 hover:text-white transition-colors duration-300">Connect</button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-400 hover:text-white focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
         </div>
-      </div>
-      <aside class="hero-panel">
-        <h2>Quick Profile</h2>
-        <ul>
-          <li><strong>Location:</strong> Layyah, Pakistan</li>
-          <li><strong>University:</strong> University of Layyah</li>
-          <li><strong>Field:</strong> Data Science (2nd Semester)</li>
-          <li><strong>Email:</strong> abbaszargham730@gmail.com</li>
-        </ul>
-      </aside>
-    </section>
 
-    <section class="stats section reveal" aria-label="Highlights">
-      <article class="stat-card">
-        <h3>2nd</h3>
-        <p>Semester in Data Science</p>
-      </article>
-      <article class="stat-card">
-        <h3>6+</h3>
-        <p>Hands-on Learning Projects</p>
-      </article>
-      <article class="stat-card">
-        <h3>24/7</h3>
-        <p>Growth & Skill Development Mindset</p>
-      </article>
-    </section>
-
-    <section class="skills section reveal" id="skills">
-      <h2>Skills Showcase</h2>
-      <div class="skills-grid">
-        <article class="skill-card">
-          <h3>Data Science & Python</h3>
-          <p>Learning and building with Python, Pandas, NumPy, data handling, and ML foundations.</p>
-          <div class="skill-meter">
-            <div class="meter-label"><span>Python</span><span>82%</span></div>
-            <div class="meter-track"><span class="meter-fill" data-level="82"></span></div>
-          </div>
-          <div class="skill-meter">
-            <div class="meter-label"><span>Pandas / Data Analysis</span><span>78%</span></div>
-            <div class="meter-track"><span class="meter-fill" data-level="78"></span></div>
-          </div>
-        </article>
-
-        <article class="skill-card">
-          <h3>Ethical Hacking</h3>
-          <p>Beginner-level ethical hacking journey with OSINT, security basics, and pentesting practice labs.</p>
-          <div class="skill-meter">
-            <div class="meter-label"><span>OSINT</span><span>70%</span></div>
-            <div class="meter-track"><span class="meter-fill" data-level="70"></span></div>
-          </div>
-          <div class="skill-meter">
-            <div class="meter-label"><span>Pentesting Basics</span><span>65%</span></div>
-            <div class="meter-track"><span class="meter-fill" data-level="65"></span></div>
-          </div>
-        </article>
-
-        <article class="skill-card">
-          <h3>Advanced Web Tech</h3>
-          <p>Modern HTML, CSS, JavaScript and smooth UI implementation for responsive portfolio experiences.</p>
-          <div class="skill-meter">
-            <div class="meter-label"><span>HTML / CSS</span><span>86%</span></div>
-            <div class="meter-track"><span class="meter-fill" data-level="86"></span></div>
-          </div>
-          <div class="skill-meter">
-            <div class="meter-label"><span>JavaScript</span><span>75%</span></div>
-            <div class="meter-track"><span class="meter-fill" data-level="75"></span></div>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="projects section reveal" id="projects">
-      <div class="section-head">
-        <h2>Projects Grid</h2>
-        <div class="filters" id="projectFilters">
-          <button class="filter-btn active" data-filter="all">All</button>
-          <button class="filter-btn" data-filter="data">Data Science</button>
-          <button class="filter-btn" data-filter="security">Security</button>
-          <button class="filter-btn" data-filter="web">Web</button>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden glass-panel border-t border-white/5 absolute w-full">
+            <div class="px-4 pt-4 pb-6 space-y-4 text-center">
+                <button onclick="navigate('home'); closeMobileMenu()" class="block w-full text-sm font-medium tracking-widest uppercase text-gray-400 hover:text-white transition-colors">Home</button>
+                <button onclick="navigate('about'); closeMobileMenu()" class="block w-full text-sm font-medium tracking-widest uppercase text-gray-400 hover:text-white transition-colors">About</button>
+                <button onclick="navigate('experience'); closeMobileMenu()" class="block w-full text-sm font-medium tracking-widest uppercase text-gray-400 hover:text-white transition-colors">Experience</button>
+                <button onclick="navigate('contact'); closeMobileMenu()" class="block w-full text-sm font-medium tracking-widest uppercase text-gray-400 hover:text-white transition-colors">Connect</button>
+            </div>
         </div>
-      </div>
+    </nav>
 
-      <div class="project-grid" id="projectGrid">
-        <article class="project-card" data-category="web">
-          <h3>Personal Portfolio Website</h3>
-          <p>My advanced personal portfolio with smooth animations, terminal simulation, and responsive layout.</p>
-          <div class="tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
-          <div class="project-actions">
-            <a href="https://github.com/Zhvsjzv/my-portfolio" target="_blank" rel="noopener noreferrer" class="btn btn-outline">View Code</a>
-            <a href="https://zargham.me" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Live Demo</a>
-          </div>
-        </article>
+    <!-- Main Content -->
+    <main class="flex-grow pt-20 flex flex-col relative z-10">
+        
+        <!-- PAGE 1: HOME -->
+        <section id="home" class="page active flex-grow flex items-center justify-center py-20 relative">
+            <!-- Subtle atmospheric glow behind text -->
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-900/10 rounded-full blur-[120px] pointer-events-none"></div>
+            
+            <div class="max-w-5xl mx-auto px-4 w-full text-center relative z-10">
+                <div class="space-y-8">
+                    <p class="font-mono text-blue-500 tracking-[0.3em] uppercase text-sm font-bold">
+                        <i class="fa-solid fa-shield-halved mr-2"></i> System Architect & Analyst
+                    </p>
+                    
+                    <h1 class="font-cinematic text-5xl sm:text-6xl md:text-7xl font-bold text-white tracking-wide glow-text leading-tight">
+                        Muhammad Zargham Abbas
+                    </h1>
+                    
+                    <h2 class="text-xl sm:text-2xl font-light text-gray-300 tracking-wide">
+                        Data Science & Cybersecurity
+                    </h2>
+                    
+                    <p class="max-w-2xl mx-auto text-gray-400 text-lg font-light leading-relaxed">
+                        Architecting systems, analyzing data, and securing the digital frontier.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-6 pt-10">
+                        <button onclick="navigate('experience')" class="group relative px-8 py-3 bg-transparent overflow-hidden rounded-sm border border-blue-500/50 hover:border-blue-500 transition-colors w-full sm:w-auto">
+                            <div class="absolute inset-0 bg-blue-500/10 translate-y-[100%] group-hover:translate-y-[0%] transition-transform duration-300 ease-out"></div>
+                            <span class="relative font-mono text-sm tracking-widest uppercase text-blue-400 group-hover:text-white transition-colors">Explore My Journey</span>
+                        </button>
+                        <button onclick="navigate('contact')" class="group relative px-8 py-3 bg-transparent overflow-hidden rounded-sm border border-white/20 hover:border-white/50 transition-colors w-full sm:w-auto">
+                            <span class="relative font-mono text-sm tracking-widest uppercase text-gray-300 group-hover:text-white transition-colors">Establish Connection</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        <article class="project-card" data-category="data">
-          <h3>Student Data Analysis Mini Lab</h3>
-          <p>Practice project for cleaning, exploring, and visualizing student data using Python and Pandas.</p>
-          <div class="tags"><span>Python</span><span>Pandas</span><span>Matplotlib</span></div>
-          <div class="project-actions">
-            <a href="https://github.com/Zhvsjzv" target="_blank" rel="noopener noreferrer" class="btn btn-outline">View Code</a>
-            <a href="https://github.com/Zhvsjzv" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Live Demo</a>
-          </div>
-        </article>
+        <!-- PAGE 2: ABOUT ME -->
+        <section id="about" class="page flex-grow py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-16 text-center">
+                    <h2 class="font-cinematic text-4xl font-bold text-white tracking-widest uppercase glow-text mb-2">The Deep Dive</h2>
+                    <div class="w-16 h-0.5 bg-blue-500/50 mx-auto"></div>
+                </div>
 
-        <article class="project-card" data-category="security">
-          <h3>OSINT Learning Toolkit</h3>
-          <p>Beginner-friendly toolkit for OSINT workflows, profile footprint checks, and public-source analysis.</p>
-          <div class="tags"><span>OSINT</span><span>Security</span><span>Automation</span></div>
-          <div class="project-actions">
-            <a href="https://github.com/Zhvsjzv" target="_blank" rel="noopener noreferrer" class="btn btn-outline">View Code</a>
-            <a href="https://github.com/Zhvsjzv" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Live Demo</a>
-          </div>
-        </article>
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                    
+                    <!-- Bio -->
+                    <div class="lg:col-span-7 space-y-6 glass-panel p-8 md:p-10 rounded-sm">
+                        <p class="text-gray-300 font-light leading-relaxed text-lg">
+                            Raised in the city of Layyah, my path has been driven by an insatiable need to understand the unseen mechanics of the digital world. I completed my Intermediate studies at <strong class="text-white font-medium">Govt Graduate College Layyah</strong>, building a strong analytical foundation.
+                        </p>
+                        <p class="text-gray-300 font-light leading-relaxed text-lg">
+                            Currently, I am pursuing higher education in Informatics, engaging deeply with tailored coursework in English to master global technological standards. I thrive at the intersection where data analysis meets robust security protocols.
+                        </p>
+                        <div class="mt-8 border-l-2 border-blue-500 pl-6 py-2">
+                            <p class="text-blue-400 font-mono text-sm leading-relaxed tracking-wide italic">
+                                "Currently immersed in a rigorous 1-month sprint to master Python automation and foundational Machine Learning using VS Code on a pure Ubuntu environment."
+                            </p>
+                        </div>
+                    </div>
 
-        <article class="project-card" data-category="web">
-          <h3>Interactive Terminal Portfolio</h3>
-          <p>JavaScript-driven terminal with custom commands, typing simulation, and smooth command responses.</p>
-          <div class="tags"><span>ES6+</span><span>UI/UX</span><span>Frontend</span></div>
-          <div class="project-actions">
-            <a href="https://github.com/Zhvsjzv/my-portfolio" target="_blank" rel="noopener noreferrer" class="btn btn-outline">View Code</a>
-            <a href="https://zargham.me" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Live Demo</a>
-          </div>
-        </article>
+                    <!-- Tech Arsenal -->
+                    <div class="lg:col-span-5 glass-panel p-8 md:p-10 rounded-sm">
+                        <h3 class="font-mono text-sm tracking-widest uppercase text-gray-400 mb-8 border-b border-white/10 pb-4">Tech Arsenal</h3>
+                        
+                        <div class="space-y-4">
+                            <!-- Skill -->
+                            <div class="flex items-center group">
+                                <div class="w-12 h-12 flex items-center justify-center bg-black/50 border border-white/5 rounded-sm text-blue-500 group-hover:border-blue-500/50 group-hover:shadow-neon transition-all duration-300 mr-4">
+                                    <i class="fa-brands fa-python text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-white font-medium tracking-wide">Python</h4>
+                                    <p class="text-xs text-gray-500 font-mono mt-1">Core Logic & Automation</p>
+                                </div>
+                            </div>
+                            <!-- Skill -->
+                            <div class="flex items-center group">
+                                <div class="w-12 h-12 flex items-center justify-center bg-black/50 border border-white/5 rounded-sm text-blue-500 group-hover:border-blue-500/50 group-hover:shadow-neon transition-all duration-300 mr-4">
+                                    <i class="fa-solid fa-brain text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-white font-medium tracking-wide">Machine Learning</h4>
+                                    <p class="text-xs text-gray-500 font-mono mt-1">Foundational Algorithms</p>
+                                </div>
+                            </div>
+                            <!-- Skill -->
+                            <div class="flex items-center group">
+                                <div class="w-12 h-12 flex items-center justify-center bg-black/50 border border-white/5 rounded-sm text-blue-500 group-hover:border-blue-500/50 group-hover:shadow-neon transition-all duration-300 mr-4">
+                                    <i class="fa-solid fa-shield-halved text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-white font-medium tracking-wide">Cybersecurity</h4>
+                                    <p class="text-xs text-gray-500 font-mono mt-1">Threat Modeling & Defense</p>
+                                </div>
+                            </div>
+                            <!-- Skill -->
+                            <div class="flex items-center group">
+                                <div class="w-12 h-12 flex items-center justify-center bg-black/50 border border-white/5 rounded-sm text-blue-500 group-hover:border-blue-500/50 group-hover:shadow-neon transition-all duration-300 mr-4">
+                                    <i class="fa-brands fa-ubuntu text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-white font-medium tracking-wide">Ubuntu / Linux</h4>
+                                    <p class="text-xs text-gray-500 font-mono mt-1">Native Environment</p>
+                                </div>
+                            </div>
+                            <!-- Skill -->
+                            <div class="flex items-center group">
+                                <div class="w-12 h-12 flex items-center justify-center bg-black/50 border border-white/5 rounded-sm text-blue-500 group-hover:border-blue-500/50 group-hover:shadow-neon transition-all duration-300 mr-4">
+                                    <i class="fa-solid fa-terminal text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-white font-medium tracking-wide">Automation Scripting</h4>
+                                    <p class="text-xs text-gray-500 font-mono mt-1">Pipeline Optimization</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-        <article class="project-card" data-category="data">
-          <h3>Semester Learning Tracker</h3>
-          <p>Dashboard-style project to track semester goals, skills growth, and coding practice milestones.</p>
-          <div class="tags"><span>JavaScript</span><span>Charts</span><span>Data</span></div>
-          <div class="project-actions">
-            <a href="https://github.com/Zhvsjzv" target="_blank" rel="noopener noreferrer" class="btn btn-outline">View Code</a>
-            <a href="https://github.com/Zhvsjzv" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Live Demo</a>
-          </div>
-        </article>
+                </div>
+            </div>
+        </section>
 
-        <article class="project-card" data-category="security">
-          <h3>Ethical Hacking Notes Hub</h3>
-          <p>Organized notes and practice roadmap for legal ethical hacking learning and vulnerability basics.</p>
-          <div class="tags"><span>Pentesting</span><span>Notes</span><span>Cybersecurity</span></div>
-          <div class="project-actions">
-            <a href="https://github.com/Zhvsjzv" target="_blank" rel="noopener noreferrer" class="btn btn-outline">View Code</a>
-            <a href="https://github.com/Zhvsjzv" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Live Demo</a>
-          </div>
-        </article>
-      </div>
-    </section>
+        <!-- PAGE 3: EXPERIENCE -->
+        <section id="experience" class="page flex-grow py-24">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-16 text-center">
+                    <h2 class="font-cinematic text-4xl font-bold text-white tracking-widest uppercase glow-text mb-2">The Journey</h2>
+                    <div class="w-16 h-0.5 bg-blue-500/50 mx-auto"></div>
+                </div>
 
-    <section class="terminal section reveal" id="terminal">
-      <h2>Interactive Terminal</h2>
-      <div class="terminal-window" aria-live="polite">
-        <div class="terminal-head">
-          <span class="dot red"></span>
-          <span class="dot yellow"></span>
-          <span class="dot green"></span>
-          <p>zargham@portfolio:~</p>
+                <div class="space-y-8">
+                    
+                    <!-- Card 2 -->
+                    <div class="glass-panel p-8 md:p-10 rounded-sm border-l-4 border-l-blue-500 hover:shadow-neon-hover transition-all duration-500 relative overflow-hidden group">
+                        <!-- Subtle hover gradient background -->
+                        <div class="absolute inset-0 bg-gradient-to-r from-blue-900/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                        
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 border-b border-white/5 pb-4">
+                            <h3 class="font-cinematic text-2xl font-bold text-white tracking-wide">Leadership & Tech</h3>
+                            <span class="font-mono text-sm text-blue-400 mt-2 sm:mt-0 tracking-widest">DECEMBER 2025</span>
+                        </div>
+                        <p class="text-gray-400 font-light leading-relaxed text-lg">
+                            Hosted a major university function tailored for Artificial Intelligence and Data Science students. This platform allowed me to showcase my leadership and public speaking skills, orchestrating an event that bridged complex theoretical concepts with engaging discussions for an academic audience.
+                        </p>
+                    </div>
+
+                    <!-- Card 1 -->
+                    <div class="glass-panel p-8 md:p-10 rounded-sm border-l-4 border-l-gray-600 hover:border-l-blue-500 hover:shadow-neon-hover transition-all duration-500 relative overflow-hidden group">
+                        <div class="absolute inset-0 bg-gradient-to-r from-blue-900/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                        
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 border-b border-white/5 pb-4">
+                            <h3 class="font-cinematic text-2xl font-bold text-white tracking-wide">The Lucky Patcher Era</h3>
+                            <span class="font-mono text-sm text-gray-500 mt-2 sm:mt-0 tracking-widest">8-9 YEARS AGO</span>
+                        </div>
+                        <p class="text-gray-400 font-light leading-relaxed text-lg">
+                            My introduction to technology wasn't conventional. About 8-9 years ago, I started using Lucky Patcher to crack games and bypass restrictions for unlimited coins. That pure childhood drive to bypass limitations, circumvent rules, and uncover how systems are built evolved into a serious, calculated passion for understanding software architecture and securing vulnerable systems.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 4: CONTACT -->
+        <section id="contact" class="page flex-grow py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="mb-16 text-center">
+                    <h2 class="font-cinematic text-4xl font-bold text-white tracking-widest uppercase glow-text mb-2">Connect</h2>
+                    <div class="w-16 h-0.5 bg-blue-500/50 mx-auto"></div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-5 gap-10">
+                    
+                    <!-- Contact Info -->
+                    <div class="lg:col-span-2 space-y-6">
+                        <a href="mailto:abbaszargham730@gmail.com" class="flex items-center p-6 glass-panel hover:bg-white/5 transition-colors duration-300 rounded-sm group">
+                            <i class="fa-solid fa-envelope text-2xl text-gray-500 group-hover:text-blue-500 transition-colors mr-6"></i>
+                            <div>
+                                <h4 class="text-xs font-mono tracking-widest text-gray-500 uppercase mb-1">Email</h4>
+                                <p class="text-gray-300 font-light break-all group-hover:text-white transition-colors">abbaszargham730@gmail.com</p>
+                            </div>
+                        </a>
+
+                        <a href="https://wa.me/923079968638" target="_blank" class="flex items-center p-6 glass-panel hover:bg-white/5 transition-colors duration-300 rounded-sm group">
+                            <i class="fa-brands fa-whatsapp text-2xl text-gray-500 group-hover:text-green-500 transition-colors mr-6"></i>
+                            <div>
+                                <h4 class="text-xs font-mono tracking-widest text-gray-500 uppercase mb-1">Secure Line</h4>
+                                <p class="text-gray-300 font-light group-hover:text-white transition-colors">+92 307 9968638</p>
+                            </div>
+                        </a>
+
+                        <a href="https://instagram.com/zargham78901" target="_blank" class="flex items-center p-6 glass-panel hover:bg-white/5 transition-colors duration-300 rounded-sm group">
+                            <i class="fa-brands fa-instagram text-2xl text-gray-500 group-hover:text-pink-500 transition-colors mr-6"></i>
+                            <div>
+                                <h4 class="text-xs font-mono tracking-widest text-gray-500 uppercase mb-1">Instagram</h4>
+                                <p class="text-gray-300 font-light group-hover:text-white transition-colors">zargham78901</p>
+                            </div>
+                        </a>
+
+                        <a href="https://github.com/Zhvsjzv" target="_blank" class="flex items-center p-6 glass-panel hover:bg-white/5 transition-colors duration-300 rounded-sm group">
+                            <i class="fa-brands fa-github text-2xl text-gray-500 group-hover:text-white transition-colors mr-6"></i>
+                            <div>
+                                <h4 class="text-xs font-mono tracking-widest text-gray-500 uppercase mb-1">GitHub repository</h4>
+                                <p class="text-gray-300 font-light group-hover:text-white transition-colors">github.com/Zhvsjzv</p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div class="lg:col-span-3 glass-panel p-8 md:p-10 rounded-sm">
+                        <form onsubmit="event.preventDefault(); alert('Transmission sequence initiated. (Backend not linked)');">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                                <div>
+                                    <label class="block text-xs font-mono tracking-widest text-gray-500 uppercase mb-2">Identifier</label>
+                                    <input type="text" class="w-full bg-black/40 border border-white/10 text-white px-4 py-3 focus:outline-none focus:border-blue-500 focus:shadow-neon transition-all font-light rounded-sm" placeholder="John Doe" required>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-mono tracking-widest text-gray-500 uppercase mb-2">Return Address</label>
+                                    <input type="email" class="w-full bg-black/40 border border-white/10 text-white px-4 py-3 focus:outline-none focus:border-blue-500 focus:shadow-neon transition-all font-light rounded-sm" placeholder="john@domain.com" required>
+                                </div>
+                            </div>
+                            <div class="mb-6">
+                                <label class="block text-xs font-mono tracking-widest text-gray-500 uppercase mb-2">Transmission Subject</label>
+                                <input type="text" class="w-full bg-black/40 border border-white/10 text-white px-4 py-3 focus:outline-none focus:border-blue-500 focus:shadow-neon transition-all font-light rounded-sm" placeholder="Inquiry" required>
+                            </div>
+                            <div class="mb-8">
+                                <label class="block text-xs font-mono tracking-widest text-gray-500 uppercase mb-2">Encrypted Payload</label>
+                                <textarea rows="4" class="w-full bg-black/40 border border-white/10 text-white px-4 py-3 focus:outline-none focus:border-blue-500 focus:shadow-neon transition-all font-light rounded-sm resize-none" placeholder="Enter details..." required></textarea>
+                            </div>
+                            <button type="submit" class="w-full py-4 bg-transparent border border-blue-500 text-blue-400 font-mono tracking-widest uppercase hover:bg-blue-500 hover:text-white transition-colors duration-300 rounded-sm">
+                                Transmit Data
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/5 py-8 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
+            <p class="text-xs font-mono text-gray-600 tracking-widest uppercase">
+                &copy; <span id="year"></span> zargham.me
+            </p>
+            <p class="text-[10px] font-mono text-gray-700 tracking-widest">
+                Dev ID: 111491
+            </p>
         </div>
-        <div class="terminal-body" id="terminalOutput"></div>
-        <form id="terminalForm" class="terminal-input-row" autocomplete="off">
-          <label for="terminalInput" class="prompt">$</label>
-          <input id="terminalInput" name="terminalInput" type="text" placeholder="Try: help, bio, skills, github, contact" />
-          <span class="cursor" aria-hidden="true"></span>
-        </form>
-      </div>
-    </section>
+    </footer>
 
-    <section class="contact section reveal" id="contact">
-      <h2>Contact</h2>
-      <div class="contact-grid">
-        <form class="contact-form" id="contactForm" novalidate>
-          <div class="form-row">
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" required />
-            <small class="error" data-for="name"></small>
-          </div>
-          <div class="form-row">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required />
-            <small class="error" data-for="email"></small>
-          </div>
-          <div class="form-row">
-            <label for="message">Message</label>
-            <textarea id="message" name="message" rows="5" required></textarea>
-            <small class="error" data-for="message"></small>
-          </div>
-          <button type="submit" class="btn btn-primary" id="submitBtn">Send Message</button>
-        </form>
+    <!-- Scripts -->
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
 
-        <aside class="contact-card">
-          <h3>Direct Links</h3>
-          <a href="mailto:abbaszargham730@gmail.com">abbaszargham730@gmail.com</a>
-          <a href="https://github.com/Zhvsjzv" target="_blank" rel="noopener noreferrer">github.com/Zhvsjzv</a>
-          <a href="https://zargham.me" target="_blank" rel="noopener noreferrer">zargham.me</a>
-          <a href="#projects">View all projects</a>
-        </aside>
-      </div>
-    </section>
-  </main>
+        // SPA Navigation Logic
+        const navLinks = document.querySelectorAll('.nav-link');
+        const pages = document.querySelectorAll('.page');
 
-  <div id="toastContainer" class="toast-container" aria-live="assertive"></div>
+        function navigate(pageId) {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
 
-  <script src="script.js"></script>
+            pages.forEach(page => page.classList.remove('active'));
+            
+            const target = document.getElementById(pageId);
+            if(target) target.classList.add('active');
+
+            navLinks.forEach(link => {
+                if(link.textContent.toLowerCase() === pageId || (pageId === 'experience' && link.textContent === 'Experience') || (pageId === 'contact' && link.textContent === 'Connect')) {
+                    link.classList.remove('text-gray-400');
+                    link.classList.add('text-white', 'glow-text');
+                } else {
+                    link.classList.add('text-gray-400');
+                    link.classList.remove('text-white', 'glow-text');
+                }
+            });
+            
+            history.pushState(null, null, '#' + pageId);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const hash = window.location.hash.substring(1);
+            if (hash && document.getElementById(hash)) {
+                navigate(hash);
+            } else {
+                navigate('home');
+            }
+        });
+
+        window.addEventListener('popstate', () => {
+            const hash = window.location.hash.substring(1) || 'home';
+            if (document.getElementById(hash)) navigate(hash);
+        });
+
+        // Mobile Menu
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        function closeMobileMenu() {
+            mobileMenu.classList.add('hidden');
+        }
+
+        // --- KONAMI CODE & MATRIX HACKER OVERRIDE ---
+        const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+        let konamiIndex = 0;
+        
+        const canvas = document.getElementById('matrix-canvas');
+        const ctx = canvas.getContext('2d');
+        const flashOverlay = document.getElementById('flash-overlay');
+        const overrideAlert = document.getElementById('override-alert');
+        let matrixInterval;
+
+        // Matrix setup
+        const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$+-*/=%""\'#&_(),.;:?!\\|{}<>[]^~';
+        const fontSize = 16;
+        let columns, drops;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            columns = canvas.width / fontSize;
+            drops = [];
+            for(let x = 0; x < columns; x++) drops[x] = 1;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#0F0';
+            ctx.font = fontSize + 'px monospace';
+            
+            for(let i = 0; i < drops.length; i++) {
+                const text = letters.charAt(Math.floor(Math.random() * letters.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                if(drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
+            }
+        }
+
+        function triggerHackerMode() {
+            // Flash screen
+            flashOverlay.classList.remove('flash-anim');
+            void flashOverlay.offsetWidth; // trigger reflow
+            flashOverlay.classList.add('flash-anim');
+
+            // Show Matrix
+            canvas.style.opacity = '1';
+            clearInterval(matrixInterval);
+            matrixInterval = setInterval(drawMatrix, 33);
+
+            // Show Custom Alert
+            setTimeout(() => {
+                overrideAlert.classList.add('show');
+            }, 1000);
+
+            // Hide after a few seconds
+            setTimeout(() => {
+                overrideAlert.classList.remove('show');
+                canvas.style.opacity = '0';
+                setTimeout(() => clearInterval(matrixInterval), 500);
+            }, 6000);
+        }
+
+        document.addEventListener('keydown', (e) => {
+            const key = e.key;
+            // Ignore case for letters b and a
+            const expectedKey = konamiCode[konamiIndex];
+            const isMatch = (key.toLowerCase() === expectedKey.toLowerCase());
+            
+            if (isMatch) {
+                konamiIndex++;
+                if (konamiIndex === konamiCode.length) {
+                    triggerHackerMode();
+                    konamiIndex = 0;
+                }
+            } else {
+                // Reset if wrong key, but check if it's the start of a new sequence
+                konamiIndex = (key.toLowerCase() === konamiCode[0].toLowerCase()) ? 1 : 0;
+            }
+        });
+    </script>
 </body>
 </html>
