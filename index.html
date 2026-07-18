@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Muhammad Zargham Abbas — Architecting the Future</title>
+  <meta name="description" content="Muhammad Zargham Abbas — Machine Learning engineer and cybersecurity specialist. Architecting intelligent systems and securing tomorrow's networks." />
+  <meta name="author" content="Muhammad Zargham Abbas" />
+  <meta name="keywords" content="Muhammad Zargham Abbas, Machine Learning, Cybersecurity, Python, Portfolio, Informatics, AI" />
+  <meta property="og:title" content="Muhammad Zargham Abbas — Architecting the Future" />
+  <meta property="og:description" content="Machine Learning & Cybersecurity. Step into the future." />
+  <meta property="og:type" content="website" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!--  INTRO LOADER                                          -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div id="loader" class="loader" aria-label="Loading">
+    <div class="loader__ring">
+      <svg viewBox="0 0 120 120" class="loader__ring-svg">
+        <circle cx="60" cy="60" r="54" fill="none" stroke="url(#loaderGrad)" stroke-width="1.5" stroke-dasharray="339.292" stroke-dashoffset="339.292" id="loader-circle" />
+        <defs>
+          <linearGradient id="loaderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#00e5ff" />
+            <stop offset="100%" stop-color="#a855f7" />
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+    <div class="loader__text-wrap">
+      <span class="loader__greeting" id="loader-greeting">Initializing</span>
+      <span class="loader__name" id="loader-name"></span>
+    </div>
+    <div class="loader__progress-track">
+      <div class="loader__progress-fill" id="loader-progress"></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!--  CUSTOM CURSOR                                          -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div id="cursor-dot" class="cursor cursor--dot"></div>
+  <div id="cursor-ring" class="cursor cursor--ring"></div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!--  AMBIENT BACKGROUND                                     -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <canvas id="ambient-canvas" class="ambient-canvas" aria-hidden="true"></canvas>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!--  NOISE OVERLAY                                          -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div class="noise-overlay" aria-hidden="true"></div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!--  MAIN CONTENT                                           -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <main id="main-content" class="main" style="opacity:0; visibility:hidden;">
+
+    <!-- ── NAV ─────────────────────────────────────────────── -->
+    <nav class="nav" id="main-nav">
+      <a href="#hero" class="nav__logo magnetic-el" id="nav-logo">zargham<span class="nav__logo-dot">.me</span></a>
+      <ul class="nav__links">
+        <li><a href="#origin" class="nav__link magnetic-el">Origin</a></li>
+        <li><a href="#lab" class="nav__link magnetic-el">Lab</a></li>
+        <li><a href="#vision" class="nav__link magnetic-el">Vision</a></li>
+        <li><a href="#connect" class="nav__link magnetic-el">Connect</a></li>
+      </ul>
+      <div class="nav__status">
+        <span class="nav__status-dot"></span>
+        <span class="nav__status-text">Available</span>
+      </div>
+    </nav>
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!--  SECTION 1 — THE PORTAL (HERO)                         -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <section id="hero" class="hero">
+      <!-- Floating decorative elements -->
+      <div class="hero__floaters" aria-hidden="true">
+        <div class="floater floater--1"></div>
+        <div class="floater floater--2"></div>
+        <div class="floater floater--3"></div>
+        <div class="floater floater--4"></div>
+      </div>
+
+      <div class="hero__container">
+        <div class="hero__grid">
+          <!-- LEFT: TEXT CONTENT -->
+          <div class="hero__content">
+            <div class="hero__badge reveal" id="hero-badge">
+              <span class="hero__badge-dot"></span>
+              <span>Open to Opportunities</span>
+            </div>
+
+            <h1 class="hero__title reveal reveal--d1">
+              <span class="hero__title-line hero__title-line--sm">Step into the</span>
+              <span class="hero__title-line hero__title-line--lg">
+                <span class="text-gradient">Future</span><span class="hero__title-period">.</span>
+              </span>
+            </h1>
+
+            <p class="hero__intro reveal reveal--d2">
+              I am <strong>Muhammad Zargham Abbas</strong> —
+            </p>
+
+            <p class="hero__desc reveal reveal--d3">
+              Architecting Machine Learning algorithms &amp; securing tomorrow's networks. From Layyah, Pakistan to the cutting edge of intelligent systems.
+            </p>
+
+            <div class="hero__actions reveal reveal--d4">
+              <a href="#connect" class="btn btn--primary magnetic-el" id="hero-cta-connect">
+                <span class="btn__text">Get in Touch</span>
+                <span class="btn__icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </span>
+              </a>
+              <a href="#origin" class="btn btn--outline magnetic-el" id="hero-cta-origin">
+                <span class="btn__text">My Story</span>
+              </a>
+            </div>
+
+            <!-- Stats Row -->
+            <div class="hero__stats reveal reveal--d5">
+              <div class="hero__stat">
+                <span class="hero__stat-value counter" data-target="8">0</span>
+                <span class="hero__stat-label">Years Exploring Tech</span>
+              </div>
+              <div class="hero__stat-divider"></div>
+              <div class="hero__stat">
+                <span class="hero__stat-value counter" data-target="19">0</span>
+                <span class="hero__stat-label">Years Old</span>
+              </div>
+              <div class="hero__stat-divider"></div>
+              <div class="hero__stat">
+                <span class="hero__stat-value">∞</span>
+                <span class="hero__stat-label">Curiosity</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT: PROFILE IMAGE -->
+          <div class="hero__visual reveal reveal--d2">
+            <div class="tilt-card" id="tilt-card">
+              <!-- Aura glow behind -->
+              <div class="tilt-card__aura" id="tilt-aura"></div>
+
+              <!-- Main card -->
+              <div class="tilt-card__face">
+                <img src="profile.jpg" alt="Muhammad Zargham Abbas" class="tilt-card__img" loading="eager" />
+                <div class="tilt-card__sheen" id="tilt-sheen"></div>
+                <div class="tilt-card__overlay">
+                  <div class="tilt-card__info">
+                    <span class="tilt-card__name">Muhammad Zargham Abbas</span>
+                    <span class="tilt-card__role">ML &amp; Cybersecurity</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Floating border ring -->
+              <div class="tilt-card__ring"></div>
+            </div>
+
+            <!-- Orbiting badges -->
+            <div class="hero__orbit" aria-hidden="true">
+              <div class="orbit-badge orbit-badge--1">🧠 ML</div>
+              <div class="orbit-badge orbit-badge--2">🔐 Security</div>
+              <div class="orbit-badge orbit-badge--3">🐍 Python</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scroll cue -->
+      <div class="hero__scroll-cue">
+        <span class="hero__scroll-text">Scroll to explore</span>
+        <div class="hero__scroll-line">
+          <div class="hero__scroll-dot"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!--  DIVIDER — MARQUEE                                     -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span class="marquee__item">Machine Learning</span>
+        <span class="marquee__sep">◆</span>
+        <span class="marquee__item">Cybersecurity</span>
+        <span class="marquee__sep">◆</span>
+        <span class="marquee__item">Python Automation</span>
+        <span class="marquee__sep">◆</span>
+        <span class="marquee__item">Reverse Engineering</span>
+        <span class="marquee__sep">◆</span>
+        <span class="marquee__item">Informatics</span>
+        <span class="marquee__sep">◆</span>
+        <span class="marquee__item">Ubuntu Environment</span>
+        <span class="marquee__sep">◆</span>
+        <span class="marquee__item">Machine Learning</span>
+        <span class="marquee__sep">◆</span>
+        <span class="marquee__item">Cybersecurity</span>
+        <span class="marquee__sep">◆</span>
+        <span class="marquee__item">Python Automation</span>
+        <span class="marquee__sep">◆</span>
+        <span class="marquee__item">Reverse Engineering</span>
+        <span class="marquee__sep">◆</span>
+        <span class="marquee__item">Informatics</span>
+        <span class="marquee__sep">◆</span>
+        <span class="marquee__item">Ubuntu Environment</span>
+        <span class="marquee__sep">◆</span>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!--  SECTION 2 — THE ORIGIN (ABOUT)                        -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <section id="origin" class="section origin">
+      <div class="section__container">
+
+        <!-- Section eyebrow -->
+        <div class="section__header reveal">
+          <span class="section__eyebrow">01</span>
+          <span class="section__label">The Origin</span>
+          <div class="section__line"></div>
+        </div>
+
+        <h2 class="section__title reveal reveal--d1">
+          Every future is built<br />on <span class="text-gradient">a beginning</span>.
+        </h2>
+
+        <!-- Origin Story: The Roots -->
+        <div class="origin__block origin__block--roots">
+          <div class="origin__text-col reveal reveal--d1">
+            <span class="origin__chapter">Chapter I — The Roots</span>
+            <h3 class="origin__heading">From Layyah to the Digital Frontier</h3>
+            <p class="origin__paragraph">
+              Raised in <strong>Layyah, Pakistan</strong>, I grew up far from the tech hubs of the world — but the internet erased that distance. Formed at <strong>Govt Graduate College</strong>, I developed an early, relentless obsession with understanding how systems work, how they break, and how they can be rebuilt better.
+            </p>
+            <p class="origin__paragraph">
+              At just <strong>11 years old</strong>, I discovered <strong>Lucky Patcher</strong> — a tool that let me shatter the limitations of software. While other kids played games, I was cracking them. That childhood rebellion wasn't vandalism; it was my first lesson in <strong>reverse engineering</strong>, in understanding that every system has a logic you can learn, and eventually, master.
+            </p>
+          </div>
+          <div class="origin__visual-col reveal reveal--d2">
+            <div class="origin__card glass-panel">
+              <div class="origin__card-icon">🌍</div>
+              <div class="origin__card-content">
+                <span class="origin__card-label">Location</span>
+                <span class="origin__card-value">Layyah, Punjab, Pakistan</span>
+              </div>
+            </div>
+            <div class="origin__card glass-panel">
+              <div class="origin__card-icon">🎓</div>
+              <div class="origin__card-content">
+                <span class="origin__card-label">Education</span>
+                <span class="origin__card-value">Govt Graduate College → Informatics</span>
+              </div>
+            </div>
+            <div class="origin__card glass-panel">
+              <div class="origin__card-icon">⚡</div>
+              <div class="origin__card-content">
+                <span class="origin__card-label">First Spark</span>
+                <span class="origin__card-value">Lucky Patcher, ~8 years ago</span>
+              </div>
+            </div>
+            <div class="origin__card glass-panel">
+              <div class="origin__card-icon">🧬</div>
+              <div class="origin__card-content">
+                <span class="origin__card-label">Age</span>
+                <span class="origin__card-value">19 years old</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="origin__divider reveal">
+          <div class="origin__divider-line"></div>
+          <span class="origin__divider-icon">◆</span>
+          <div class="origin__divider-line"></div>
+        </div>
+
+        <!-- Origin Story: The Pivot -->
+        <div class="origin__block origin__block--pivot">
+          <div class="origin__visual-col reveal reveal--d1">
+            <div class="origin__highlight glass-panel">
+              <div class="origin__highlight-badge">2025 Milestone</div>
+              <h4 class="origin__highlight-title">University AI &amp; Tech Summit</h4>
+              <p class="origin__highlight-desc">
+                Hosted and commanded a large-scale event at the intersection of artificial intelligence, innovation, and leadership — proving that great technology needs more than code.
+              </p>
+              <div class="origin__highlight-tags">
+                <span class="tag">Leadership</span>
+                <span class="tag">Public Speaking</span>
+                <span class="tag">AI Summit</span>
+                <span class="tag">Event Management</span>
+              </div>
+            </div>
+          </div>
+          <div class="origin__text-col reveal reveal--d2">
+            <span class="origin__chapter">Chapter II — The Pivot</span>
+            <h3 class="origin__heading">Commanding the Stage</h3>
+            <p class="origin__paragraph">
+              Technology without leadership is just a tool. In <strong>2025</strong>, I didn't just attend a major university AI &amp; Tech summit — I <strong>hosted and led</strong> it. Standing before hundreds, orchestrating speakers, panels, and demonstrations, I proved to myself and others that building the future requires more than brilliant code.
+            </p>
+            <p class="origin__paragraph">
+              It requires <strong>vision</strong>. It requires the ability to inspire, communicate complex ideas with clarity, and command a room. That summit wasn't just an event — it was the moment I understood that my path lies at the intersection of <strong>deep technical expertise</strong> and <strong>powerful leadership</strong>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!--  SECTION 3 — THE LAB (CURRENT FOCUS)                   -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <section id="lab" class="section lab">
+      <div class="section__container">
+
+        <div class="section__header reveal">
+          <span class="section__eyebrow">02</span>
+          <span class="section__label">The Lab</span>
+          <div class="section__line"></div>
+        </div>
+
+        <h2 class="section__title reveal reveal--d1">
+          Currently deep in a<br /><span class="text-gradient">1-month intensive sprint</span>.
+        </h2>
+
+        <p class="lab__intro reveal reveal--d2">
+          Right now, I'm in the trenches — running a rigorous, self-designed training program focused on Python automation and foundational Machine Learning, operating entirely within a pure Ubuntu environment. No distractions. Pure craft.
+        </p>
+
+        <!-- Tech Nodes Grid -->
+        <div class="lab__grid">
+
+          <!-- Node 1: Ubuntu -->
+          <div class="lab__node glass-panel reveal" id="lab-node-ubuntu">
+            <div class="lab__node-glow" style="--node-color: #E95420;"></div>
+            <div class="lab__node-header">
+              <div class="lab__node-icon-wrap" style="--node-color: #E95420;">
+                <span class="lab__node-icon">🐧</span>
+              </div>
+              <span class="lab__node-status">Active</span>
+            </div>
+            <h3 class="lab__node-title">Pure Ubuntu OS</h3>
+            <p class="lab__node-desc">
+              My daily driver. A clean, distraction-free Linux environment optimized for development. Terminal-first workflows, bash scripting, and full system control.
+            </p>
+            <div class="lab__node-bar">
+              <div class="lab__node-bar-fill" style="--fill: 95%; --node-color: #E95420;"></div>
+            </div>
+            <span class="lab__node-bar-label">Environment Mastery — 95%</span>
+          </div>
+
+          <!-- Node 2: VS Code -->
+          <div class="lab__node glass-panel reveal reveal--d1" id="lab-node-vscode">
+            <div class="lab__node-glow" style="--node-color: #007ACC;"></div>
+            <div class="lab__node-header">
+              <div class="lab__node-icon-wrap" style="--node-color: #007ACC;">
+                <span class="lab__node-icon">💻</span>
+              </div>
+              <span class="lab__node-status">Active</span>
+            </div>
+            <h3 class="lab__node-title">VS Code</h3>
+            <p class="lab__node-desc">
+              Customized to the pixel. Extensions for Python, Jupyter, Git integration, and linting. My command center for writing clean, efficient code.
+            </p>
+            <div class="lab__node-bar">
+              <div class="lab__node-bar-fill" style="--fill: 90%; --node-color: #007ACC;"></div>
+            </div>
+            <span class="lab__node-bar-label">Proficiency — 90%</span>
+          </div>
+
+          <!-- Node 3: Python -->
+          <div class="lab__node glass-panel reveal reveal--d2" id="lab-node-python">
+            <div class="lab__node-glow" style="--node-color: #3776AB;"></div>
+            <div class="lab__node-header">
+              <div class="lab__node-icon-wrap" style="--node-color: #3776AB;">
+                <span class="lab__node-icon">🐍</span>
+              </div>
+              <span class="lab__node-status">Intensive</span>
+            </div>
+            <h3 class="lab__node-title">Python Automation</h3>
+            <p class="lab__node-desc">
+              Building scripts, data pipelines, web scrapers, and automation workflows. Mastering the language that powers modern AI — from fundamentals to advanced patterns.
+            </p>
+            <div class="lab__node-bar">
+              <div class="lab__node-bar-fill" style="--fill: 75%; --node-color: #3776AB;"></div>
+            </div>
+            <span class="lab__node-bar-label">Sprint Progress — 75%</span>
+          </div>
+
+          <!-- Node 4: ML Mathematics -->
+          <div class="lab__node glass-panel reveal reveal--d3" id="lab-node-ml">
+            <div class="lab__node-glow" style="--node-color: #a855f7;"></div>
+            <div class="lab__node-header">
+              <div class="lab__node-icon-wrap" style="--node-color: #a855f7;">
+                <span class="lab__node-icon">🧠</span>
+              </div>
+              <span class="lab__node-status">Intensive</span>
+            </div>
+            <h3 class="lab__node-title">ML Mathematics</h3>
+            <p class="lab__node-desc">
+              Linear algebra, calculus, probability theory, and statistics — the mathematical bedrock beneath every intelligent algorithm. Building intuition, not just formulas.
+            </p>
+            <div class="lab__node-bar">
+              <div class="lab__node-bar-fill" style="--fill: 60%; --node-color: #a855f7;"></div>
+            </div>
+            <span class="lab__node-bar-label">Foundation Building — 60%</span>
+          </div>
+        </div>
+
+        <!-- Sprint Status -->
+        <div class="lab__sprint reveal">
+          <div class="lab__sprint-inner glass-panel">
+            <div class="lab__sprint-icon">🚀</div>
+            <div class="lab__sprint-info">
+              <h4 class="lab__sprint-title">Active Sprint Status</h4>
+              <p class="lab__sprint-desc">1-Month Intensive — Python Automation &amp; Foundational ML in a Pure Ubuntu Environment</p>
+            </div>
+            <div class="lab__sprint-progress">
+              <svg viewBox="0 0 100 100" class="lab__sprint-ring">
+                <circle cx="50" cy="50" r="42" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="5" />
+                <circle cx="50" cy="50" r="42" fill="none" stroke="url(#sprintGrad)" stroke-width="5" 
+                        stroke-dasharray="263.89" stroke-dashoffset="79.17" stroke-linecap="round"
+                        transform="rotate(-90 50 50)" />
+                <defs>
+                  <linearGradient id="sprintGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#00e5ff" />
+                    <stop offset="100%" stop-color="#a855f7" />
+                  </linearGradient>
+                </defs>
+              </svg>
+              <span class="lab__sprint-pct">70%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!--  SECTION 4 — THE VISION (FUTURE)                       -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <section id="vision" class="section vision">
+      <div class="section__container">
+
+        <div class="section__header reveal">
+          <span class="section__eyebrow">03</span>
+          <span class="section__label">The Vision</span>
+          <div class="section__line"></div>
+        </div>
+
+        <h2 class="section__title reveal reveal--d1">
+          Where I'm headed<br /><span class="text-gradient">next</span>.
+        </h2>
+
+        <p class="vision__intro reveal reveal--d2">
+          The future isn't something I wait for — it's something I architect. My next chapter: a deep dive into <strong>Informatics</strong>, merging theoretical computer science with practical cybersecurity and intelligent systems.
+        </p>
+
+        <!-- Roadmap -->
+        <div class="vision__roadmap">
+
+          <!-- Milestone 1 -->
+          <div class="vision__milestone reveal">
+            <div class="vision__milestone-marker">
+              <div class="vision__milestone-dot"></div>
+              <div class="vision__milestone-line"></div>
+            </div>
+            <div class="vision__milestone-card glass-panel">
+              <span class="vision__milestone-phase">Phase 01</span>
+              <h3 class="vision__milestone-title">Foundational Mastery</h3>
+              <p class="vision__milestone-desc">
+                Complete the intensive Python &amp; ML sprint. Build a rock-solid foundation in programming, data structures, and algorithmic thinking. This is the launchpad.
+              </p>
+              <div class="vision__milestone-tags">
+                <span class="tag tag--cyan">Python</span>
+                <span class="tag tag--cyan">Algorithms</span>
+                <span class="tag tag--cyan">Data Structures</span>
+              </div>
+              <span class="vision__milestone-status vision__milestone-status--active">
+                <span class="pulse-dot pulse-dot--sm"></span>
+                In Progress
+              </span>
+            </div>
+          </div>
+
+          <!-- Milestone 2 -->
+          <div class="vision__milestone reveal reveal--d1">
+            <div class="vision__milestone-marker">
+              <div class="vision__milestone-dot"></div>
+              <div class="vision__milestone-line"></div>
+            </div>
+            <div class="vision__milestone-card glass-panel">
+              <span class="vision__milestone-phase">Phase 02</span>
+              <h3 class="vision__milestone-title">Informatics &amp; Higher Education</h3>
+              <p class="vision__milestone-desc">
+                Advance into a formal Informatics program. Study computational theory, information systems, and the mathematics of intelligent decision-making at a deeper level.
+              </p>
+              <div class="vision__milestone-tags">
+                <span class="tag tag--violet">Informatics</span>
+                <span class="tag tag--violet">Computational Theory</span>
+                <span class="tag tag--violet">Mathematics</span>
+              </div>
+              <span class="vision__milestone-status">Upcoming</span>
+            </div>
+          </div>
+
+          <!-- Milestone 3 -->
+          <div class="vision__milestone reveal reveal--d2">
+            <div class="vision__milestone-marker">
+              <div class="vision__milestone-dot"></div>
+              <div class="vision__milestone-line"></div>
+            </div>
+            <div class="vision__milestone-card glass-panel">
+              <span class="vision__milestone-phase">Phase 03</span>
+              <h3 class="vision__milestone-title">Cybersecurity Specialization</h3>
+              <p class="vision__milestone-desc">
+                Merge the reverse-engineering instincts honed since age 11 with formal cybersecurity training. Pursue certifications, capture-the-flag competitions, and real-world security research.
+              </p>
+              <div class="vision__milestone-tags">
+                <span class="tag tag--cyan">Penetration Testing</span>
+                <span class="tag tag--cyan">Network Security</span>
+                <span class="tag tag--cyan">CTF</span>
+              </div>
+              <span class="vision__milestone-status">On the Horizon</span>
+            </div>
+          </div>
+
+          <!-- Milestone 4 -->
+          <div class="vision__milestone reveal reveal--d3">
+            <div class="vision__milestone-marker">
+              <div class="vision__milestone-dot"></div>
+            </div>
+            <div class="vision__milestone-card glass-panel vision__milestone-card--glow">
+              <span class="vision__milestone-phase">The Destination</span>
+              <h3 class="vision__milestone-title">ML-Powered Cybersecurity</h3>
+              <p class="vision__milestone-desc">
+                The ultimate convergence: building intelligent systems that can autonomously detect, predict, and neutralize cyber threats. Using Machine Learning not just as a tool, but as the backbone of next-generation defense.
+              </p>
+              <div class="vision__milestone-tags">
+                <span class="tag tag--gradient">AI Security</span>
+                <span class="tag tag--gradient">Threat Intelligence</span>
+                <span class="tag tag--gradient">Autonomous Systems</span>
+              </div>
+              <span class="vision__milestone-status">The Mission</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quote -->
+        <div class="vision__quote reveal">
+          <blockquote class="vision__quote-text">
+            "The best way to predict the future is to <span class="text-gradient">architect it</span>."
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!--  SECTION 5 — INITIATE CONNECTION                       -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <section id="connect" class="section connect">
+      <div class="section__container">
+
+        <div class="section__header reveal">
+          <span class="section__eyebrow">04</span>
+          <span class="section__label">Connect</span>
+          <div class="section__line"></div>
+        </div>
+
+        <h2 class="section__title reveal reveal--d1">
+          Let's build something<br /><span class="text-gradient">extraordinary</span>.
+        </h2>
+
+        <p class="connect__intro reveal reveal--d2">
+          Whether you want to collaborate on a project, discuss ideas about ML and cybersecurity, or just connect — I'm always open to conversations that push boundaries.
+        </p>
+
+        <!-- Contact Cards -->
+        <div class="connect__grid">
+
+          <a href="mailto:abbaszargham730@gmail.com" class="connect__card glass-panel magnetic-el reveal" id="connect-email">
+            <div class="connect__card-icon-wrap">
+              <svg class="connect__card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="4" width="20" height="16" rx="3" />
+                <path d="M22 7l-10 7L2 7" />
+              </svg>
+            </div>
+            <div class="connect__card-info">
+              <span class="connect__card-label">Email</span>
+              <span class="connect__card-value">abbaszargham730@gmail.com</span>
+            </div>
+            <span class="connect__card-arrow">→</span>
+          </a>
+
+          <a href="tel:+923079968638" class="connect__card glass-panel magnetic-el reveal reveal--d1" id="connect-phone">
+            <div class="connect__card-icon-wrap">
+              <svg class="connect__card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
+              </svg>
+            </div>
+            <div class="connect__card-info">
+              <span class="connect__card-label">Phone</span>
+              <span class="connect__card-value">+92 307 9968638</span>
+            </div>
+            <span class="connect__card-arrow">→</span>
+          </a>
+
+          <a href="https://github.com/Zhvsjzv" target="_blank" rel="noopener noreferrer" class="connect__card glass-panel magnetic-el reveal reveal--d2" id="connect-github">
+            <div class="connect__card-icon-wrap">
+              <svg class="connect__card-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+              </svg>
+            </div>
+            <div class="connect__card-info">
+              <span class="connect__card-label">GitHub</span>
+              <span class="connect__card-value">Zhvsjzv</span>
+            </div>
+            <span class="connect__card-arrow">→</span>
+          </a>
+
+          <a href="https://instagram.com/zargham78901" target="_blank" rel="noopener noreferrer" class="connect__card glass-panel magnetic-el reveal reveal--d3" id="connect-insta">
+            <div class="connect__card-icon-wrap">
+              <svg class="connect__card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" />
+                <circle cx="12" cy="12" r="5" />
+                <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none" />
+              </svg>
+            </div>
+            <div class="connect__card-info">
+              <span class="connect__card-label">Instagram</span>
+              <span class="connect__card-value">@zargham78901</span>
+            </div>
+            <span class="connect__card-arrow">→</span>
+          </a>
+        </div>
+
+        <!-- Availability Banner -->
+        <div class="connect__availability reveal">
+          <div class="connect__availability-inner glass-panel">
+            <div class="connect__availability-dot-wrap">
+              <span class="pulse-dot pulse-dot--lg"></span>
+            </div>
+            <div class="connect__availability-info">
+              <h4 class="connect__availability-title">Currently Available</h4>
+              <p class="connect__availability-desc">Open for internships, collaborations, research opportunities, and conversations about the future of AI &amp; security.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════════════════ -->
+    <!--  FOOTER                                                -->
+    <!-- ══════════════════════════════════════════════════════ -->
+    <footer class="footer">
+      <div class="footer__container">
+        <div class="footer__top">
+          <span class="footer__logo">zargham<span class="nav__logo-dot">.me</span></span>
+          <div class="footer__links">
+            <a href="#hero" class="footer__link">Portal</a>
+            <a href="#origin" class="footer__link">Origin</a>
+            <a href="#lab" class="footer__link">Lab</a>
+            <a href="#vision" class="footer__link">Vision</a>
+            <a href="#connect" class="footer__link">Connect</a>
+          </div>
+        </div>
+        <div class="footer__bottom">
+          <span class="footer__copy">&copy; 2026 Muhammad Zargham Abbas. All rights reserved.</span>
+          <span class="footer__tagline">Architecting Intelligence.</span>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
